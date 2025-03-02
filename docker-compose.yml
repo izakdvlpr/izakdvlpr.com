@@ -49,6 +49,7 @@ services:
   web-prod:
     <<: *web
     image: izakdvlpr/izakdvlpr.com:latest
+    network_mode: host
     profiles:
       - prod
 
