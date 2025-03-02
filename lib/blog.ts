@@ -29,7 +29,7 @@ function getSlug(filePath: string) {
 }
 
 function getFiles() {
-  return fg.sync('posts/**/*.mdx')
+  return fg.sync('posts/*.mdx')
 }
 
 export async function getAllPosts(): Promise<Post[]> {
