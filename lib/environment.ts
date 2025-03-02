@@ -10,9 +10,7 @@ export const environment = createEnv({
     SMTP_USERNAME: z.string(),
     SMTP_PASSWORD: z.string(),
     SMTP_SECURE: z.coerce.boolean().optional().default(false),
-    REDIS_HOST: z.string(),
-    REDIS_PORT: z.coerce.number().int().positive(),
-    REDIS_PASSWORD: z.string(),
+    REDIS_URL: z.string(),
   },
   runtimeEnv: {
     DISCORD_ID: process.env.DISCORD_ID,
@@ -22,8 +20,6 @@ export const environment = createEnv({
     SMTP_USERNAME: process.env.SMTP_USERNAME,
     SMTP_PASSWORD: process.env.SMTP_PASSWORD,
     SMTP_SECURE: process.env.SMTP_SECURE,
-    REDIS_HOST: process.env.REDIS_HOST,
-    REDIS_PORT: process.env.REDIS_PORT,
-    REDIS_PASSWORD: process.env.REDIS_PASSWORD,
+    REDIS_URL: process.env.REDIS_URL,
   },
 })
