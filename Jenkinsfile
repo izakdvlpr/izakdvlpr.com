@@ -6,25 +6,36 @@ pipeline {
         GIT_BRANCH_NAME = "${env.GIT_BRANCH.split("/")[1]}"
     }
     stages {
-        stage('Run Unit Tests and Static Code Analysis') {
+        stage('Build and Publish Docker Images to Docker Hub') {
             when {
-                expression { env.GIT_BRANCH_NAME == 'develop' && env.GIT_TAG == null } 
-            }
-            agent {
-                docker {
-                    image 'node:lts'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
-                }
+                expression { env.GIT_BRANCH_NAME == 'develop' } 
             }
             stages {
-                stage('Install dependencies') {
+                stage('Login to Docker Hub') {
                     steps {
-                        sh 'npm install --no-package-lock'
+                        withCredentials([
+                            usernamePassword(
+                                credentialsId: 'izakdvlpr-dockerhub',
+                                usernameVariable: 'DOCKER_USERNAME',
+                                passwordVariable: 'DOCKER_PASSWORD'
+                            )
+                        ]) {
+                            script {
+                                env.DOCKER_IMAGE_NAME = "$DOCKER_USERNAME/${env.GIT_REPOSITORY_NAME}"
+                            
+                                sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+                            }
+                        }
                     }
                 }
-                stage('Static Code Analysis') {
+                stage('Build Docker Image') {
                     steps {
-                        sh 'npm run lint'
+                        sh "docker build --target production --no-cache --tag ${env.DOCKER_IMAGE_NAME}:latest ."
+                    }
+                }
+                stage('Push Docker Image to Docker Hub') {
+                    steps {
+                        sh "docker push ${env.DOCKER_IMAGE_NAME}:latest"
                     }
                 }
             }
@@ -33,6 +44,7 @@ pipeline {
     post {
         always {
             cleanWs()
+            sh 'docker logout'
         }
     }
 }
