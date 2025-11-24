@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import path from 'node:path'
 import dayjs from 'dayjs'
 import fg from 'fast-glob'
 import matter from 'gray-matter'
@@ -29,7 +30,7 @@ function getSlug(filePath: string) {
 }
 
 function getFiles() {
-  return fg.sync('posts/*.mdx')
+  return fg.sync('posts/*.mdx', { cwd: process.cwd() })
 }
 
 export async function getAllPosts(): Promise<Post[]> {
@@ -70,7 +71,8 @@ export async function getPostBySlug(
   }
 
   try {
-    const source = await fs.promises.readFile(`posts/${slug}.mdx`, 'utf-8')
+    const filePath = path.join(process.cwd(), 'posts', `${slug}.mdx`)
+    const source = await fs.promises.readFile(filePath, 'utf-8')
 
     const times = readingTime(source)
 
