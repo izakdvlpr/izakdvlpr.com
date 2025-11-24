@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { NextResponse } from 'next/server'
 
-import { environment } from '@/lib/environment'
+import { DISCORD_ID } from '@/utils'
 
 dayjs.extend(duration)
 
@@ -17,16 +17,16 @@ function formatTime(time: number) {
 
 export async function GET() {
   const user = await axios
-    .get(`https://api.lanyard.rest/v1/users/${environment.DISCORD_ID}`)
+    .get(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
     .then((res) => res.data.data)
     .catch(() => null)
     
   if (!user) {
     return NextResponse.json({ error: 'An error occurred' }, { status: 500 })
   }
-
+  
   const vscode = user?.activities?.find(
-    (a: any) => a.name === 'Visual Studio Code',
+    (a: any) => ['Visual Studio Code', 'Code'].includes(a.name),
   )
 
   return NextResponse.json({

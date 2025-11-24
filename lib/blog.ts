@@ -4,8 +4,8 @@ import fg from 'fast-glob'
 import matter from 'gray-matter'
 import readingTime from 'reading-time'
 
-import { VIEW_EXPIRATION } from '@/utils'
-import { redis } from './redis'
+// import { VIEW_EXPIRATION } from '@/utils'
+// import { redis } from './redis'
 
 interface Post {
   slug: string
@@ -17,7 +17,7 @@ interface Post {
   readingTime: string
   words: number
   content: string
-  views: number
+  // views: number
 }
 
 function isSlug(slug: string): boolean {
@@ -79,12 +79,12 @@ export async function getPostBySlug(
       content,
     } = matter(source)
 
-    const views = fetchViews
-      ? await redis
-          .get(`posts:${slug}`)
-          .then(Number)
-          .catch(() => 0)
-      : 0
+    // const views = fetchViews
+    //   ? await redis
+    //       .get(`posts:${slug}`)
+    //       .then(Number)
+    //       .catch(() => 0)
+    //   : 0
 
     return {
       slug,
@@ -96,7 +96,7 @@ export async function getPostBySlug(
       readingTime: times.text,
       words: times.words,
       content,
-      views,
+      // views,
     }
   } catch {
     return null
@@ -107,14 +107,14 @@ export async function addViewToPost({
   slug,
   ip,
 }: { slug: string; ip: string }) {
-  const isViewed = await redis.get(`posts:${slug}:ips:${ip}`)
+  // const isViewed = await redis.get(`posts:${slug}:ips:${ip}`)
 
-  if (isViewed) {
-    return false
-  }
+  // if (isViewed) {
+  //   return false
+  // }
 
-  await redis.set(`posts:${slug}:ips:${ip}`, 'true', 'EX', VIEW_EXPIRATION)
-  await redis.incr(`posts:${slug}`)
+  // await redis.set(`posts:${slug}:ips:${ip}`, 'true', 'EX', VIEW_EXPIRATION)
+  // await redis.incr(`posts:${slug}`)
 
   return true
 }

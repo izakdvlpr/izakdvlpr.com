@@ -12,24 +12,24 @@ import { Textarea } from '@/components/ui/textarea'
 export function Form() {
   const [_error, submitAction, isPending] = useActionState(
     async (_previousState: any, formData: FormData) => {
-      const { name, email, subject, message } = Object.fromEntries(
-        formData,
-      ) as Record<string, string>
+      // const { name, email, subject, message } = Object.fromEntries(
+      //   formData,
+      // ) as Record<string, string>
 
-      const isEmailSended = await sendEmailAction({
-        name,
-        email,
-        subject,
-        message,
-      })
+      // const isEmailSended = await sendEmailAction({
+      //   name,
+      //   email,
+      //   subject,
+      //   message,
+      // })
 
-      if (!isEmailSended) {
+      // if (!isEmailSended) {
         toast.error('An error occurred while sending the email')
 
-        return
-      }
+      //   return
+      // }
 
-      toast.success('Email sent successfully')
+      // toast.success('Email sent successfully')
     },
     null,
   )

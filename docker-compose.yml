@@ -1,16 +1,16 @@
-x-web: &web
-  container_name: portfolio
-  restart: always
-  tty: true
-  stdin_open: true
-  env_file:
-   - .env
-  ports:
-    - "${WEB_PORT}:${WEB_PORT}"
+# x-web: &web
+#   container_name: portfolio
+#   restart: always
+#   tty: true
+#   stdin_open: true
+#   env_file:
+#    - .env
+#   ports:
+#     - "${WEB_PORT}:${WEB_PORT}"
 
 services:
   redis:
-    container_name: portfolio-redis
+    container_name: redis
     image: bitnami/redis:latest
     restart: always
     tty: true
@@ -31,31 +31,31 @@ services:
     profiles:
       - dev
       - ''
-  web-dev:
-    <<: *web
-    user: root
-    build:
-      context: .
-      target: development
-      dockerfile: Dockerfile
-    volumes:
-      - .:/usr/src/app
-    depends_on:
-      redis:
-        condition: service_healthy
-    profiles:
-      - dev
-      - ''
-  web-prod:
-    <<: *web
-    image: izakdvlpr/izakdvlpr.com:latest
-    network_mode: host
-    build:
-      context: .
-      target: production
-      dockerfile: Dockerfile
-    profiles:
-      - prod
+  # web-dev:
+  #   <<: *web
+  #   user: root
+  #   build:
+  #     context: .
+  #     target: development
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - .:/usr/src/app
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #   profiles:
+  #     - dev
+  #     - ''
+  # web-prod:
+  #   <<: *web
+  #   image: izakdvlpr/izakdvlpr.com:latest
+  #   network_mode: host
+  #   build:
+  #     context: .
+  #     target: production
+  #     dockerfile: Dockerfile
+  #   profiles:
+  #     - prod
 
 networks:
   default:

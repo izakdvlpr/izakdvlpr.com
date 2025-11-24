@@ -8,9 +8,9 @@ interface ReportViewProps {
 }
 
 export function ReportView({ slug }: ReportViewProps) {
-  useEffect(() => {
-    axios.post('/api/blog/view', { slug })
-  }, [slug])
+  // useEffect(() => {
+  //   axios.post('/api/blog/view', { slug })
+  // }, [slug])
 
   return null
 }

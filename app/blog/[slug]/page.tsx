@@ -89,8 +89,7 @@ export default async function PostPage({ params }: PostDetailsPageProps) {
         <h1 className="text-3xl font-extrabold">{post.title}</h1>
 
         <p className="text-sm text-gray-200">
-          {post.date} • {post.words} words • {post.readingTime} • {post.views}{' '}
-          views
+          {post.date} • {post.words} words • {post.readingTime}
         </p>
 
         <div className="flex gap-2">

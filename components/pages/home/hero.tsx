@@ -74,7 +74,7 @@ export function Hero() {
       </div>
 
       <Image
-        src="/images/avatar.jpeg"
+        src="https://github.com/izakdvlpr.png"
         alt="avatar"
         width={200}
         height={200}

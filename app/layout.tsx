@@ -2,6 +2,7 @@ import '@/styles/global.css'
 
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import Script from 'next/script'
 import type { ReactNode } from 'react'
 
 import { Footer } from '@/components/common/footer'
@@ -131,6 +132,13 @@ export default function RootLayout({
 
           <Toaster />
         </ThemeProvider>
+
+        <Script
+          defer
+          data-website-id="dfid_psWlmbb8Nm5xfeVcAGcyO"
+          data-domain="izakdvlpr.com"
+          src="https://datafa.st/js/script.js"
+        />
       </body>
     </html>
   )

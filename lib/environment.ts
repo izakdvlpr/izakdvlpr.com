@@ -3,17 +3,15 @@ import { z } from 'zod'
 
 export const environment = createEnv({
   server: {
-    DISCORD_ID: z.string(),
-    RECIPIENT_EMAIL: z.string().email(),
-    SMTP_HOST: z.string(),
-    SMTP_PORT: z.coerce.number().int().positive(),
-    SMTP_USERNAME: z.string(),
-    SMTP_PASSWORD: z.string(),
+    RECIPIENT_EMAIL: z.string().email().optional(),
+    SMTP_HOST: z.string().optional(),
+    SMTP_PORT: z.coerce.number().int().positive().optional(),
+    SMTP_USERNAME: z.string().optional(),
+    SMTP_PASSWORD: z.string().optional(),
     SMTP_SECURE: z.coerce.boolean().optional().default(false),
-    REDIS_URL: z.string(),
+    REDIS_URL: z.string().optional(),
   },
   runtimeEnv: {
-    DISCORD_ID: process.env.DISCORD_ID,
     RECIPIENT_EMAIL: process.env.RECIPIENT_EMAIL,
     SMTP_HOST: process.env.SMTP_HOST,
     SMTP_PORT: process.env.SMTP_PORT,
