@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
-import type { Revalidate } from 'next/dist/server/lib/revalidate'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { Badge } from '@/components/ui/badge'
 import { getAllPosts, getTags } from '@/lib/blog'
 
-export const revalidate: Revalidate = 60
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Isaque Lima » Blog',

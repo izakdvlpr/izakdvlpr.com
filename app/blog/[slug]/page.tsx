@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import type { Revalidate } from 'next/dist/server/lib/revalidate'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -13,7 +12,7 @@ interface PostDetailsPageProps {
   params: Promise<{ slug: string }>
 }
 
-export const revalidate: Revalidate = 60
+export const revalidate = 60
 
 export function generateStaticParams(): { slug: string }[] {
   const slugs = getSlugs()
