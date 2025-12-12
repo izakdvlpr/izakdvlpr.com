@@ -135,9 +135,8 @@ export default function RootLayout({
 
         <Script
           defer
-          data-website-id="dfid_psWlmbb8Nm5xfeVcAGcyO"
-          data-domain="izakdvlpr.com"
-          src="https://datafa.st/js/script.js"
+          data-cf-beacon='{"token": "1164f2eeb6034fcebd9aac5997ce8ba4"}'
+          src="https://static.cloudflareinsights.com/beacon.min.js"
         />
       </body>
     </html>
