@@ -108,6 +108,26 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script
+          defer
+          data-cf-beacon='{"token": "1164f2eeb6034fcebd9aac5997ce8ba4"}'
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+        />
+        
+        <Script
+          id="ga-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-9X4XZM7GBG');
+            `,
+          }}
+        />
+      </head>
+      
       <body className={cn(geistSans.variable, geistMono.variable)}>
         <ThemeProvider
           attribute="class"
@@ -132,12 +152,6 @@ export default function RootLayout({
 
           <Toaster />
         </ThemeProvider>
-
-        <Script
-          defer
-          data-cf-beacon='{"token": "1164f2eeb6034fcebd9aac5997ce8ba4"}'
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-        />
       </body>
     </html>
   )
