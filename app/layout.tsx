@@ -110,6 +110,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <Script
+          src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+        />
+        
+        <Script
+          src="https://39726c0db5d6.ngrok-free.app/analytics-tracker.js"
+        />
+        
+        <Script
           defer
           data-cf-beacon='{"token": "1164f2eeb6034fcebd9aac5997ce8ba4"}'
           src="https://static.cloudflareinsights.com/beacon.min.js"
