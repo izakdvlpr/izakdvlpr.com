@@ -110,11 +110,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <Script
-          src="https://cdn.socket.io/4.7.5/socket.io.min.js"
-        />
-        
-        <Script
-          src="https://39726c0db5d6.ngrok-free.app/analytics-tracker.js"
+          async
+          src="https://dataxmas.izakdvlpr.com/analytics.js"
+          data-website-id="59122d6d-0b6f-43f7-9510-69361013dbf2"
         />
         
         <Script
