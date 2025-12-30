@@ -111,8 +111,8 @@ export default function RootLayout({
       <head>
         <Script
           async
-          src="https://dataxmas.izakdvlpr.com/analytics.js"
-          data-website-id="59122d6d-0b6f-43f7-9510-69361013dbf2"
+          src="https://dataxamas.izakdvlpr.com/dataxamas.js"
+          data-website-id="d6423482-efa1-4b0b-8f0f-ecf1ad509cf6"
         />
         
         <Script
