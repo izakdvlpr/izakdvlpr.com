@@ -112,7 +112,7 @@ export default function RootLayout({
         <Script
           async
           src="https://dataxamas.izakdvlpr.com/dataxamas.js"
-          data-website-id="d6423482-efa1-4b0b-8f0f-ecf1ad509cf6"
+          data-website-id="4cb1fc6f-b4d1-4f0e-98ed-017e3042d48f"
         />
         
         <Script
