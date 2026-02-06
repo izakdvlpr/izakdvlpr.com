@@ -109,11 +109,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* <Script
+        <Script
           async
           src="https://dataxamas.izakdvlpr.com/dataxamas.js"
           data-website-id="4cb1fc6f-b4d1-4f0e-98ed-017e3042d48f"
-        /> */}
+        />
         
         <Script
           defer
