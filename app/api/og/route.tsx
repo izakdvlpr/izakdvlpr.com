@@ -47,7 +47,7 @@ export async function GET(request: NextRequest): Promise<ImageResponse> {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#3b82f6',
+        backgroundColor: '#FFFFFF',
         position: 'relative',
       }}
     >
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest): Promise<ImageResponse> {
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          color: 'white',
+          color: 'black',
           fontFamily: 'geist-sans-bold',
         }}
       >
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest): Promise<ImageResponse> {
             width: '400px',
             height: '2px',
             opacity: '0.6',
-            backgroundColor: 'white',
+            backgroundColor: 'black',
           }}
         />
 
@@ -91,7 +91,7 @@ export async function GET(request: NextRequest): Promise<ImageResponse> {
             fontFamily: 'geist-sans-regular',
           }}
         >
-          izak.tech
+          izakdvlpr.com
         </span>
       </h1>
     </div>,
