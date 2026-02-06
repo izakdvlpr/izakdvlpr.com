@@ -4,6 +4,7 @@ import type { HTMLAttributes, PropsWithChildren } from 'react'
 import { toast } from 'sonner'
 
 import { Button } from '../button'
+import { Badge } from '../badge'
 
 type MDXCodeBlockProps = PropsWithChildren<HTMLAttributes<HTMLPreElement>>
 
@@ -18,13 +19,13 @@ export function MDXCodeBlock(props: MDXCodeBlockProps) {
   }
 
   return (
-    <div className="p-4 flex flex-col overflow-x-auto rounded-md border-2 border-primary bg-gray-800">
+    <div className="p-4 flex flex-col overflow-x-auto rounded-md border-2 border-black bg-gray-100">
       <div className="mb-4 flex items-center justify-between">
-        <span className="text-xs font-semibold text-primary">{language}</span>
+        <span className="text-xs font-semibold text-black">{language}</span>
 
-        <Button size="sm" className="h-6 text-xs" onClick={handleCopyCode}>
+        <Badge className='cursor-pointer' onClick={handleCopyCode}>
           Copy
-        </Button>
+        </Badge>
       </div>
 
       <pre className="font-mono" {...props} />

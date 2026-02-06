@@ -12,7 +12,7 @@ export default function ContactPage() {
       <div className="flex flex-col gap-4">
         <h1 className="text-3xl font-bold">Contact</h1>
 
-        <p className="text-lg text-gray-200">
+        <p className="text-lg text-black">
           Have a question or just want to say hi? Feel free to get in touch.
         </p>
       </div>

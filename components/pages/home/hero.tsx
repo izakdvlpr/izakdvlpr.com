@@ -66,7 +66,7 @@ export function Hero() {
               asChild
             >
               <Link href={social.url} target="_blank" rel="noopener noreferrer">
-                <social.icon className="text-white" />
+                <social.icon className="text-black" />
               </Link>
             </Button>
           ))}
@@ -79,7 +79,7 @@ export function Hero() {
         width={200}
         height={200}
         priority
-        className="w-52 h-52 rounded-full"
+        className="w-52 h-52 rounded-full shadow-lg"
       />
     </section>
   )

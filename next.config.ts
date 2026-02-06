@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
       { hostname: 'i.scdn.co' },
       { hostname: 'raw.githubusercontent.com' },
       { hostname: 'github.com' },
+      { hostname: 'izakdvlpr.com' },
     ],
   },
 }

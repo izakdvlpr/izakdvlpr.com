@@ -19,7 +19,7 @@ export function Header() {
     <header className="flex items-center justify-between">
       <Link href="/">
         <h1 className="text-2xl font-bold">
-          izak<span className="text-primary">dvlpr</span>
+          izak<span className="text-black">dvlpr</span>
         </h1>
       </Link>
 
@@ -29,8 +29,8 @@ export function Header() {
             key={link.href}
             href={link.href}
             className={cn(
-              'text-gray-300',
-              pathname.startsWith(link.href) && 'font-bold text-primary',
+              'text-black',
+              pathname.startsWith(link.href) && 'font-bold text-black',
             )}
           >
             {link.title}

@@ -34,19 +34,19 @@ export default async function PostListPage() {
 
       {posts.map((post) => (
         <Link key={post.slug} href={`/blog/${post.slug}`}>
-          <article className="flex">
+          <article className="flex items-center">
             <Image
               src={post.thumbnail}
               alt={post.title}
               width={250}
               height={150}
-              className="rounded-md"
+              className="rounded-md grayscale shadow-lg"
             />
 
             <div className="ml-4 flex flex-col justify-center gap-2">
               <h2 className="text-3xl font-bold">{post.title}</h2>
 
-              <p className="text-sm text-gray-200">
+              <p className="text-sm text-black">
                 {post.date} • {post.words} words • {post.readingTime}
               </p>
             </div>

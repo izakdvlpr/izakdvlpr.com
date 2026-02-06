@@ -109,11 +109,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <Script
+        {/* <Script
           async
           src="https://dataxamas.izakdvlpr.com/dataxamas.js"
           data-website-id="4cb1fc6f-b4d1-4f0e-98ed-017e3042d48f"
-        />
+        /> */}
         
         <Script
           defer
@@ -147,17 +147,17 @@ export default function RootLayout({
       <body className={cn(geistSans.variable, geistMono.variable)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="white"
           disableTransitionOnChange
         >
-          <div className="w-full max-w-[1000px] h-screen mx-auto p-6 flex flex-col relative">
-            <div
+          <div className="w-full max-w-[900px] h-screen mx-auto p-6 flex flex-col relative">
+            {/* <div
               className="absolute top-0 flex items-center justify-center w-1/3 pointer-events-none -translate-y-1/2 left-1/2 -translate-x-1/2 -z-10 aspect-square"
               aria-hidden="true"
             >
               <div className="absolute inset-0 translate-z-0 bg-primary rounded-full blur-[120px] opacity-70" />
               <div className="absolute w-1/4 h-1/4 translate-z-0 bg-primary rounded-full blur-[40px]" />
-            </div>
+            </div> */}
 
             <Header />
 

@@ -4,7 +4,7 @@ type MDXParagraphProps = PropsWithChildren<HTMLAttributes<HTMLParagraphElement>>
 
 export function MDXParagraph({ children, ...rest }: MDXParagraphProps) {
   return (
-    <p className="text-lg leading-7 text-gray-300" {...rest}>
+    <p className="text-lg leading-7 text-black" {...rest}>
       {children}
     </p>
   )

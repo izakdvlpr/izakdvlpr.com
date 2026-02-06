@@ -10,7 +10,7 @@ interface SpotifyCardProps {
 
 export function SpotifyCard({ spotify }: SpotifyCardProps) {
   return (
-    <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-primary">
+    <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-gray-100">
       <div className="flex items-center gap-2">
         <h1 className="text-md font-medium">Listening to music</h1>
 
@@ -24,7 +24,7 @@ export function SpotifyCard({ spotify }: SpotifyCardProps) {
           title={spotify.album}
           width={64}
           height={64}
-          className="w-16 h-16 rounded-md"
+          className="w-16 h-16 rounded-md grayscale"
         />
 
         <div className="max-w-[300px] flex flex-col truncate">

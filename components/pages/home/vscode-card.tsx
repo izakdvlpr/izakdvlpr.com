@@ -9,7 +9,7 @@ interface VscodeCardProps {
 
 export function VscodeCard({ vscode }: VscodeCardProps) {
   return (
-    <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-primary">
+    <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-gray-100">
       <div className="flex items-center gap-2">
         <h1 className="text-md font-medium">Programming</h1>
 
@@ -24,7 +24,7 @@ export function VscodeCard({ vscode }: VscodeCardProps) {
             title={vscode.largeText}
             width={64}
             height={64}
-            className="w-16 h-16 rounded-md flex-shrink"
+            className="w-16 h-16 rounded-md flex-shrink grayscale"
           />
 
           <Image
@@ -33,7 +33,7 @@ export function VscodeCard({ vscode }: VscodeCardProps) {
             title={vscode.smallText}
             width={64}
             height={64}
-            className="absolute bottom-[-5px] right-[-5px] w-6 h-6 rounded-full"
+            className="absolute bottom-[-5px] right-[-5px] w-6 h-6 rounded-full grayscale"
           />
         </div>
 

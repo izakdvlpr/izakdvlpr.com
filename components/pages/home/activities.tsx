@@ -41,8 +41,8 @@ export function Activities() {
     <div className="grid grid-cols-2 gap-4">
       {isLoading && !error && (
         <>
-          <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-gray-900 animate-pulse"></div>
-          <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-gray-900 animate-pulse"></div>
+          <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-gray-100 animate-pulse"></div>
+          <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-gray-100 animate-pulse"></div>
         </>
       )}
       
