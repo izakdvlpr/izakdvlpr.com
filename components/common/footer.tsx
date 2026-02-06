@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="py-10 flex items-center justify-center">
       <p>
-        Made with ❤️ by{' '}
+        Made with ♥ by{' '}
         <Link
           href="https://github.com/izakdvlpr"
           target="_blank"
