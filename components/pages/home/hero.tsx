@@ -49,7 +49,7 @@ export function Hero() {
   return (
     <section className="my-28 flex items-center justify-between">
       <div className="flex flex-col gap-4">
-        <p className="text-4xl font-bold">Hey, i'm Izak.</p>
+        <p className="text-4xl font-bold">Hey, i'm Isaque.</p>
 
         <p className="w-[400px] text-xl">
           Full Stack Developer. Passionate about programming, technology and
