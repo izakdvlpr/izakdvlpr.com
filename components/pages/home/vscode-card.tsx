@@ -24,7 +24,7 @@ export function VscodeCard({ vscode }: VscodeCardProps) {
             title={vscode.largeText}
             width={64}
             height={64}
-            className="w-16 h-16 rounded-md flex-shrink grayscale"
+            className="w-16 h-16 rounded-md flex-shrink-0 grayscale"
           />
 
           <Image
@@ -33,7 +33,7 @@ export function VscodeCard({ vscode }: VscodeCardProps) {
             title={vscode.smallText}
             width={64}
             height={64}
-            className="absolute bottom-[-5px] right-[-5px] w-6 h-6 rounded-full grayscale"
+            className="absolute bottom-[-5px] flex-shrink-0 right-[-5px] w-6 h-6 rounded-full grayscale"
           />
         </div>
 

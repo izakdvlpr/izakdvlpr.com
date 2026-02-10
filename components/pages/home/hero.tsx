@@ -1,9 +1,12 @@
 import {
   type IconType,
+  SiDiscord,
   SiGithub,
   SiGmail,
   SiInstagram,
+  SiLastdotfm,
   SiLinkedin,
+  SiSpotify,
   SiX,
 } from '@icons-pack/react-simple-icons'
 import Image from 'next/image'
@@ -43,6 +46,21 @@ const socials: Social[] = [
     icon: SiGmail,
     url: 'malito:izakdvlpr@gmail.com',
   },
+  {
+    name: 'Gmail',
+    icon: SiDiscord,
+    url: 'https://discord.com/users/461273822360895491',
+  },
+  {
+    name: 'Gmail',
+    icon: SiSpotify,
+    url: 'https://open.spotify.com/user/ppwml35eobqppac0xxfuwztzc?si=84cea6bfef764cce',
+  },
+  {
+    name: 'Last.fm',
+    icon: SiLastdotfm,
+    url: 'https://www.last.fm/user/izakdvlpr',
+  },
 ]
 
 export function Hero() {
@@ -51,12 +69,12 @@ export function Hero() {
       <div className="flex flex-col gap-4">
         <p className="text-4xl font-bold">Hey, i'm Isaque.</p>
 
-        <p className="w-[400px] text-xl">
+        <p className="max-w-[400px] text-xl">
           Full Stack Developer. Passionate about programming, technology and
           pizza.
         </p>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           {socials.map((social) => (
             <Button
               type="button"
@@ -79,7 +97,7 @@ export function Hero() {
         width={200}
         height={200}
         priority
-        className="w-52 h-52 rounded-full shadow-lg"
+        className="w-52 h-52 rounded-full shadow-lg md:flex hidden"
       />
     </section>
   )

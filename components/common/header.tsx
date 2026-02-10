@@ -1,8 +1,20 @@
 'use client'
 
-import { cn } from '@/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+
+import { cn } from '@/utils'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu"
+import { Button } from '../ui/button'
+import { Menu } from 'lucide-react'
 
 const links = [
   { title: 'About', href: '/about' },
@@ -19,11 +31,11 @@ export function Header() {
     <header className="flex items-center justify-between">
       <Link href="/">
         <h1 className="text-2xl font-bold">
-          izak<span className="text-black">dvlpr</span>
+          izakdvlpr
         </h1>
       </Link>
 
-      <nav className="flex items-center gap-6">
+      <nav className="items-center gap-6 md:flex hidden">
         {links.map((link) => (
           <Link
             key={link.href}
@@ -37,6 +49,42 @@ export function Header() {
           </Link>
         ))}
       </nav>
+      
+      <DropdownMenu>
+        <DropdownMenuTrigger 
+          className='md:hidden flex'
+          asChild
+        >
+          <Button
+            type="button"
+            size="icon"
+            variant="outline"
+          >
+            <Menu />
+          </Button>
+        </DropdownMenuTrigger>
+        
+        <DropdownMenuContent
+          className="w-(--radix-dropdown-menu-trigger-width) min-w-56"
+          align="end"
+        >
+          <DropdownMenuGroup>
+            <DropdownMenuItem>
+              <Link href="/" className="w-full">
+                Início
+              </Link>
+            </DropdownMenuItem>
+            
+            {links.map((link) => (
+              <DropdownMenuItem key={link.href}>
+                <Link href={link.href} className="w-full">
+                  {link.title}
+                </Link>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </header>
   )
 }

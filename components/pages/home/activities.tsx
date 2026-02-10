@@ -38,7 +38,7 @@ export function Activities() {
   )
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid gap-4 md:grid-cols-2 grid-cols-1">
       {isLoading && !error && (
         <>
           <div className="h-[150px] p-4 flex flex-col gap-2 rounded-md bg-gray-100 animate-pulse"></div>
