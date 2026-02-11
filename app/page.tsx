@@ -1,12 +1,15 @@
-import { Activities } from '@/components/pages/home/activities'
-import { Hero } from '@/components/pages/home/hero'
+import { Widgets } from "@/components/pages/home/widgets";
+import { Hero } from "@/components/pages/home/hero";
+import { getStats } from "@/lib/api";
 
 export default async function HomePage() {
-  return (
-    <main className="flex flex-col gap-4">
-      <Hero />
+	const stats = await getStats();
 
-      <Activities />
-    </main>
-  )
+	return (
+		<main className="flex flex-col gap-4">
+			<Hero />
+
+			<Widgets initialData={{ stats }} />
+		</main>
+	);
 }

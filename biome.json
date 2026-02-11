@@ -1,72 +1,44 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "defaultBranch": "main",
-    "useIgnoreFile": true
-  },
-  "organizeImports": {
-    "enabled": true
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
-    "lineWidth": 80
-  },
-  "javascript": {
-    "formatter": {
-      "semicolons": "asNeeded",
-      "quoteStyle": "single",
-      "arrowParentheses": "always"
-    },
-    "parser": {
-      "unsafeParameterDecoratorsEnabled": true
-    }
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "complexity": {
-        "noStaticOnlyClass": "off",
-        "noUselessEmptyExport": "warn",
-        "useOptionalChain": "warn"
-      },
-      "correctness": {
-        "noUnusedImports": "error",
-        "noUnusedVariables": "error",
-        "useExhaustiveDependencies": "off"
-      },
-      "style": {
-        "noNonNullAssertion": "warn",
-        "noUnusedTemplateLiteral": "warn",
-        "useEnumInitializers": "warn",
-        "useLiteralEnumMembers": "warn"
-      },
-      "suspicious": {
-        "noExplicitAny": "off",
-        "useNamespaceKeyword": "warn",
-        "noArrayIndexKey": "warn"
-      }
-    }
-  },
-  "files": {
-    "ignore": [
-      "node_modules",
-      "dist",
-      "build",
-      "out",
-      "coverage",
-      "temp",
-      "tmp",
-      ".tmp",
-      ".docker",
-      ".vscode",
-      ".idea",
-      ".next"
-    ]
-  }
+	"$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+	"root": false,
+	"extends": "//",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": true,
+		"includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "space",
+		"indentWidth": 2,
+		"lineWidth": 120
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	}
 }

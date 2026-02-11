@@ -1,58 +1,58 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Isaque Lima » About',
-}
+	title: "Isaque Lima » About",
+};
 
 export default function AboutPage() {
-  function getAge() {
-    const birthDate = new Date('2003-04-01')
-    const today = new Date()
-    
-    let age = today.getFullYear() - birthDate.getFullYear()
-    
-    const monthDiff = today.getMonth() - birthDate.getMonth()
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-      age--
-    }
-    
-    return age
-  }
-  
-  return (
-    <main className="mt-10 flex flex-col gap-4 mixin/text:multi-[text-lg;text-black]">
-      <h1 className="text-3xl font-bold">About</h1>
+	function getAge() {
+		const birthDate = new Date("2003-04-01");
+		const today = new Date();
 
-      <p className="mixin/text">
-        My name is Isaque Lima, I am{' '} {getAge()}{' '}
-        years old and I am a Systems Analyst. I am passionate about
-        technology and programming, and I graduated in Systems Analysis
-        and Development from the University of Vila Velha.
-      </p>
+		let age = today.getFullYear() - birthDate.getFullYear();
 
-      <p className="mixin/text">
-        I started my career as a developer in 2018 and have accumulated
-        experience with several technologies, including TypeScript, React and
-        Node.js. I currently work at{' '}
-        <a 
-          href="https://strim.com.br" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="underline hover:text-blue-600 transition-colors"
-        >
-          Strim
-        </a>, an asset integrity startup. Throughout my career, I have participated in projects involving
-        the development of modern web applications, integrations with APIs and
-        scalable solutions.
-      </p>
+		const monthDiff = today.getMonth() - birthDate.getMonth();
 
-      <p className="mixin/text">
-        I am interested in learning new technologies, especially those focused
-        on software architecture, performance and fullstack development. In
-        addition, I constantly seek to improve my skills to create practical and
-        innovative solutions that positively impact people and companies.
-      </p>
-    </main>
-  )
+		if (
+			monthDiff < 0 ||
+			(monthDiff === 0 && today.getDate() < birthDate.getDate())
+		) {
+			age--;
+		}
+
+		return age;
+	}
+
+	return (
+		<main className="mt-10 flex flex-col gap-4">
+			<h1 className="text-3xl font-bold">About</h1>
+
+			<p className="text-lg text-black">
+				I'm Isaque Lima, a {getAge()}-year-old systems analyst holding a degree
+				in Systems Analysis and Development from the University of Vila Velha.
+				I'm passionate about technology and programming.
+			</p>
+
+			<p className="text-lg text-black">
+				I've been working as a developer since 2018, building experience with
+				TypeScript, React and Node.js. Currently, I work at{" "}
+				<a
+					href="https://strim.com.br"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="underline hover:text-blue-600 transition-colors"
+				>
+					Strim
+				</a>
+				, an asset integrity startup, where I develop modern web applications,
+				API integrations, and scalable solutions.
+			</p>
+
+			<p className="text-lg text-black">
+				I'm constantly improving my skills in software architecture, performance
+				optimization, and full-stack development, aiming to create practical and
+				innovative solutions that positively impact people and businesses.
+			</p>
+		</main>
+	);
 }

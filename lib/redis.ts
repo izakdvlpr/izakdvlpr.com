@@ -1,5 +1,5 @@
-import { Redis } from 'ioredis'
+import { Redis } from "ioredis";
 
-import { environment } from './environment'
+import { environment } from "./environment";
 
-export const redis = new Redis(environment.REDIS_URL ?? '')
+export const redis = new Redis(environment.REDIS_URL ?? "");

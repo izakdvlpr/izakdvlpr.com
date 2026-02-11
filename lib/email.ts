@@ -1,33 +1,33 @@
-import nodemailer from 'nodemailer'
+import nodemailer from "nodemailer";
 
-import { SENDER_EMAIL } from '@/utils'
-import { environment } from './environment'
+import { SENDER_EMAIL } from "@/utils";
+import { environment } from "./environment";
 
 interface SendEmailData {
-  subject: string
-  context: Record<string, any>
+	subject: string;
+	context: Record<string, any>;
 }
 
 const transport = nodemailer.createTransport({
-  host: environment.SMTP_HOST,
-  port: environment.SMTP_PORT,
-  secure: environment.SMTP_SECURE,
-  auth: {
-    user: environment.SMTP_USERNAME,
-    pass: environment.SMTP_PASSWORD,
-  },
-})
+	host: environment.SMTP_HOST,
+	port: environment.SMTP_PORT,
+	secure: environment.SMTP_SECURE,
+	auth: {
+		user: environment.SMTP_USERNAME,
+		pass: environment.SMTP_PASSWORD,
+	},
+});
 
 export async function sendEmail({
-  subject,
-  context,
+	subject,
+	context,
 }: SendEmailData): Promise<boolean> {
-  try {
-    await transport.sendMail({
-      from: SENDER_EMAIL,
-      to: environment.RECIPIENT_EMAIL,
-      subject,
-      html: `
+	try {
+		await transport.sendMail({
+			from: SENDER_EMAIL,
+			to: environment.RECIPIENT_EMAIL,
+			subject,
+			html: `
         <div>
           <ul>
             <li>Name: ${context.name}</li>
@@ -37,10 +37,10 @@ export async function sendEmail({
           </ul>
         </div>
       `,
-    })
+		});
 
-    return true
-  } catch {
-    return false
-  }
+		return true;
+	} catch {
+		return false;
+	}
 }

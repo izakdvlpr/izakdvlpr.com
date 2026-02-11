@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import axios from 'axios'
-import { useEffect } from 'react'
+import axios from "axios";
+import { useEffect } from "react";
 
 interface ReportViewProps {
-  slug: string
+	slug: string;
 }
 
 export function ReportView({ slug }: ReportViewProps) {
-  // useEffect(() => {
-  //   axios.post('/api/blog/view', { slug })
-  // }, [slug])
+	// useEffect(() => {
+	//   axios.post('/api/blog/view', { slug })
+	// }, [slug])
 
-  return null
+	return null;
 }

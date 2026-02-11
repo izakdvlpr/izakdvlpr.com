@@ -1,2 +1,2 @@
-export * from './class-name'
-export * from './constants'
+export * from "./class-name";
+export * from "./constants";
