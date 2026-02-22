@@ -1,0 +1,278 @@
+---
+title: Optimizing Developer Workflows with Biome.js
+description: Get started with Biome.js and optimize your developer workflows.
+thumbnail: /images/blog/biomejs-setup.png
+date: '2026-02-22 6:02 PM'
+tags: ['lint', 'ci-cd', 'biomejs']
+---
+
+# Stop using ESLint and Prettier (or the Terminator will visit you)
+
+If you keep using ESLint and Prettier together, there’s a small chance a T-800 from The Terminator will knock on your door and say:
+
+> “Your formatting tools are obsolete.”
+
+Don’t worry. You still have time to switch to **Biome**.
+
+# What is Biome?
+
+**Biome** is a fast all-in-one toolchain for web projects. It replaces:
+
+* ESLint → linting
+* Prettier → formatting
+* plus import sorting and more
+
+All in **one tool**, written in Rust, with extremely fast performance.
+
+Official documentation:
+**[https://biomejs.dev](https://biomejs.dev)**
+
+# Installing Biome
+
+Using npm:
+
+```bash
+npm install --save-dev @biomejs/biome
+```
+
+Or using pnpm:
+
+```bash
+pnpm add -D @biomejs/biome
+```
+
+# Initializing configuration
+
+Run:
+
+```bash
+npx @biomejs/biome init
+```
+
+This creates:
+
+```json
+biome.json
+```
+
+# Example configuration
+
+```json
+{
+	"$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineWidth": 120
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	}
+}
+```
+
+# Example code
+
+Before:
+
+```ts
+const  hello =   "world"
+console.log( hello )
+```
+
+Run:
+
+```bash
+npx biome format --write .
+```
+
+After:
+
+```ts
+const hello = "world";
+
+console.log(hello);
+```
+
+# Linting
+
+Run:
+
+```bash
+npx biome lint .
+```
+
+Fix automatically:
+
+```bash
+npx biome lint --write .
+```
+
+# VSCode integration
+
+Install the extension:
+
+**Biome JS**
+
+Then enable format on save.
+
+Biome will replace both ESLint and Prettier automatically.
+
+# Biome vs Prettier
+
+## Pros of Biome
+
+**1. Much faster**
+
+Biome is written in Rust.
+
+It’s significantly faster than Prettier.
+
+**2. One tool instead of two**
+
+No need for:
+
+* ESLint
+* Prettier
+* eslint-config-prettier
+* eslint-plugin-prettier
+
+**3. Zero config by default**
+
+Works immediately.
+
+**4. Consistent tooling**
+
+Lint + format together.
+
+## Cons of Biome
+
+**1. Smaller ecosystem**
+
+Prettier has more plugins.
+
+**2. Less mature**
+
+Prettier has been around longer.
+
+**3. Some rules still missing**
+
+Especially niche ESLint rules.
+
+# Pros of Prettier
+
+* Very mature
+* Huge ecosystem
+* Works everywhere
+
+# Cons of Prettier
+
+* Slower
+* Requires ESLint for linting
+* More configuration complexity
+
+# When you should use Biome
+
+Use Biome if:
+
+* Starting a new project
+* You want simplicity
+* You want performance
+* You use modern stack (React, Node, TypeScript)
+
+# When you may stay with Prettier
+
+Stay if:
+
+* Legacy project
+* Heavy ESLint customization
+* Specific plugins required
+
+# Conclusion
+
+Biome is the future.
+
+It replaces:
+
+* ESLint
+* Prettier
+
+with:
+
+* one dependency
+* better performance
+* simpler configuration
+
+And most importantly…
+
+You won’t have to worry about a robot from the future showing up.
+
+# Bonus: Biome CI with GitHub Actions
+
+You can run Biome automatically on every push using GitHub Actions.
+
+Create the file:
+
+```
+.github/workflows/biome.yml
+```
+
+Add:
+
+```yaml
+name: Biome
+
+on: [push, pull_request]
+
+jobs:
+  biome:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - run: npx biome lint .
+
+      - run: npx biome format --check .
+```
+
+Done.
+
+Now every push and pull request will fail if the code is not linted or formatted correctly.
+

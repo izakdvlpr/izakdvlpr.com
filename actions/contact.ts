@@ -2,7 +2,7 @@
 
 import { sendEmail } from "@/lib/email";
 import { redis } from "@/lib/redis";
-import { MAX_SEND_EMAILS, RATE_LIMIT_WINDOW_EXPIRATION } from "@/utils";
+import { MAX_SEND_EMAILS, RATE_LIMIT_WINDOW_EXPIRATION } from "@/lib/constants";
 import { getIp } from "@/utils/get-ip";
 
 interface SendEmailActionData {

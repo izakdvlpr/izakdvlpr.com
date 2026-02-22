@@ -1,31 +1,22 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-import { SENDER_EMAIL } from "@/utils";
-import { environment } from "./environment";
+import { SENDER_EMAIL } from "@/lib/constants";
+import { env } from "./env";
 
 interface SendEmailData {
 	subject: string;
 	context: Record<string, any>;
 }
 
-const transport = nodemailer.createTransport({
-	host: environment.SMTP_HOST,
-	port: environment.SMTP_PORT,
-	secure: environment.SMTP_SECURE,
-	auth: {
-		user: environment.SMTP_USERNAME,
-		pass: environment.SMTP_PASSWORD,
-	},
-});
+const resend = new Resend(env.RESEND_API_KEY);
 
-export async function sendEmail({
-	subject,
-	context,
-}: SendEmailData): Promise<boolean> {
+export async function sendEmail({ subject, context }: SendEmailData): Promise<boolean> {
 	try {
-		await transport.sendMail({
+		const start = Date.now();
+
+		const response = await resend.emails.send({
 			from: SENDER_EMAIL,
-			to: environment.RECIPIENT_EMAIL,
+			to: SENDER_EMAIL,
 			subject,
 			html: `
         <div>
@@ -39,8 +30,18 @@ export async function sendEmail({
       `,
 		});
 
+		if (response.error) {
+			console.error(`Error sending email: ${response.error}`);
+
+			return false;
+		}
+
+		console.info(`Email sent in ${Date.now() - start}ms with id ${response.data?.id}`);
+
 		return true;
-	} catch {
+	} catch (error) {
+		console.error(`Error sending email: ${error}`);
+
 		return false;
 	}
 }

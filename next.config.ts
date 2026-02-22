@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
 			{ hostname: "raw.githubusercontent.com" },
 			{ hostname: "github.com" },
 			{ hostname: "izakdvlpr.com" },
+      { hostname: "cdn.discordapp.com" },
+			{ hostname: "lastfm.freetls.fastly.net" },
 		],
 	},
 };

@@ -1,0 +1,150 @@
+---
+title: How to Configure a Domain Using Nginx, Certbot, and Cloudflare
+description: Configuring a domain on a server using Nginx, Certbot, and Cloudflare with SSL and DNS setup.
+thumbnail: /images/blog/configuring-domain-on-server.png
+date: '2026-02-22 4:46 PM'
+tags: ['nginx', 'cloudflare', 'certbot']
+---
+
+Before configuring your server, you need to point your domain to your VPS. This is done using a DNS manager.
+
+You can use any DNS provider, such as:
+
+* Cloudflare
+* Amazon Web Services (Route 53)
+* Hostinger
+* Squarespace (Squarespace Domains)
+* or your domain registrar’s DNS
+
+The process is very similar across all providers. In this guide, Cloudflare will be used as an example.
+
+### Step-by-step (Cloudflare)
+
+1. Log in to your Cloudflare dashboard
+2. Select your domain
+3. Click **DNS** in the sidebar
+4. Click **Add record**
+
+Create the root domain record:
+
+* **Type:** A
+* **Name:** `example.com`
+* **IPv4 address:** `192.0.2.10`
+* **Proxy status:** DNS only
+
+Click **Save**
+
+Then create the API subdomain:
+
+* **Type:** A
+* **Name:** `api.example.com`
+* **IPv4 address:** `192.0.2.10`
+* **Proxy status:** DNS only
+
+Click **Save**
+
+Your domain now points to your server.
+
+DNS propagation may take a few minutes.
+
+## Installing Nginx
+
+Nginx will be used as a reverse proxy to expose your application.
+
+This guide assumes you are using **Ubuntu**.
+
+### Step 1 — Update the system
+
+```bash
+sudo apt update
+```
+
+### Step 2 — Install Nginx
+
+```bash
+sudo apt install nginx -y
+```
+
+### Step 3 — Start Nginx
+
+```bash
+sudo systemctl start nginx
+```
+
+### Step 4 — Enable auto-start on boot
+
+```bash
+sudo systemctl enable nginx
+```
+
+### Step 5 — Verify installation
+
+Check the status:
+
+```bash
+sudo systemctl status nginx
+```
+
+You should see:
+
+```
+active (running)
+```
+
+You can also open your server IP in the browser:
+
+```
+http://192.0.2.10
+```
+
+You should see the default Nginx welcome page.
+
+Nginx is now installed and ready for configuration.
+
+## Nginx Configuration
+
+Open the Nginx configuration file:
+
+```
+/etc/nginx/sites-available/default
+```
+
+Add the following at the end of the file:
+
+```nginx
+server {
+    server_name example.com;
+    client_max_body_size 10G;
+
+    location / {
+        proxy_pass http://127.0.0.1:4000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+Then test and restart Nginx:
+
+```bash
+nginx -t
+systemctl restart nginx
+```
+
+Check the status:
+
+```bash
+systemctl status nginx
+```
+
+## SSL Certificate (HTTPS)
+
+Run the following command:
+
+```bash
+certbot --nginx -d example.com -d api.example.com --register-unsafely-without-email
+```
+
+When prompted, select option **2 (Redirect)** to automatically redirect all HTTP traffic to HTTPS.

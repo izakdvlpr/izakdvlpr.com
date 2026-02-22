@@ -9,7 +9,7 @@ import { Footer } from "@/components/common/footer";
 import { Header } from "@/components/common/header";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { PUBLIC_URL } from "@/utils";
+import { PUBLIC_URL } from "@/lib/constants";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 
 const geistSans = Geist({
@@ -52,9 +52,7 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
@@ -93,16 +91,10 @@ export default function RootLayout({
 				</Script>
 			</head>
 
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="white"
-					disableTransitionOnChange
-				>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				<ThemeProvider attribute="class" defaultTheme="white" disableTransitionOnChange>
 					<ReactQueryProvider>
-						<div className="w-full max-w-[900px] h-screen mx-auto p-6 flex flex-col relative">
+						<div className="w-full max-w-225 h-screen mx-auto p-6 flex flex-col relative">
 							<Header />
 
 							{children}

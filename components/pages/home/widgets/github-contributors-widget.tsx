@@ -2,12 +2,12 @@
 
 import { GitBranch } from "lucide-react";
 import HeatMap, { SVGProps } from "@uiw/react-heat-map";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import type { Contributors } from "@/lib/api";
+import type { Github } from "@/lib/api";
 
-interface ContributorsWidgetProps {
-	contributors: Contributors | null;
+interface GithubContributorsWidgetProps {
+	github: Github | null;
 }
 
 function getDateSuffix(day: number) {
@@ -52,33 +52,39 @@ const renderRect =
 		);
 	};
 
-export function ContributorsWidget({ contributors }: ContributorsWidgetProps) {
-	const defaultValue = `${formatNumber(contributors?.totalContributions ?? 0)} contributions in the last year`;
+export function GithubContributorsWidget({ github }: GithubContributorsWidgetProps) {
+	const defaultValue = `${formatNumber(github?.totalContributions ?? 0)} contributions in the last year`;
 
 	const [hoveredTile, setHoveredTile] = useState<string | null>(defaultValue);
+	const scrollRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (scrollRef.current) {
+			scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+		}
+	}, [github]);
 
 	return (
-		<div className="md:col-span-3 col-span-1 h-[200px] p-5 rounded-md bg-gray-100">
+		<div className="md:col-span-3 col-span-1 h-50 p-5 rounded-md bg-gray-100">
 			<div className="flex items-center gap-2 justify-between mb-2">
 				<div className="flex items-center gap-2">
-					<h1 className="text-md font-medium">Activity</h1>
+					<h1 className="text-md font-medium">Github Contributions</h1>
 					<GitBranch size={18} />
 				</div>
 
-				{contributors && (
-					<span className="text-sm text-gray-600">{hoveredTile}</span>
-				)}
+				{github && <span className="text-sm text-gray-600">{hoveredTile}</span>}
 			</div>
 
-			{contributors ? (
+			{github ? (
 				<div
+					ref={scrollRef}
 					className="overflow-x-auto overflow-y-hidden [&::-webkit-scrollbar]:hidden"
 					style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
 				>
 					<HeatMap
 						{...getCalendarDateProps()}
 						onMouseLeave={() => setHoveredTile(defaultValue)}
-						value={contributors.data}
+						value={github.items}
 						weekLabels={false}
 						monthLabels={false}
 						legendCellSize={0}
@@ -99,10 +105,10 @@ export function ContributorsWidget({ contributors }: ContributorsWidgetProps) {
 				<p className="text-sm text-gray-500">No contribution data available.</p>
 			)}
 
-			{contributors && (
+			{github && (
 				<p className="mt-2 text-sm text-gray-600">
 					Last pushed on{" "}
-					{new Date(contributors.lastPushedAt).toLocaleDateString("en-US", {
+					{new Date(github.lastPushedAt).toLocaleDateString("en-US", {
 						month: "long",
 						day: "numeric",
 						year: "numeric",

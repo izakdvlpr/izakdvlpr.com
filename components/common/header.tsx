@@ -9,8 +9,6 @@ import {
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
@@ -38,10 +36,7 @@ export function Header() {
 					<Link
 						key={link.href}
 						href={link.href}
-						className={cn(
-							"text-black",
-							pathname.startsWith(link.href) && "font-bold text-black",
-						)}
+						className={cn("text-black", pathname.startsWith(link.href) && "font-bold text-black")}
 					>
 						{link.title}
 					</Link>
@@ -55,10 +50,7 @@ export function Header() {
 					</Button>
 				</DropdownMenuTrigger>
 
-				<DropdownMenuContent
-					className="w-(--radix-dropdown-menu-trigger-width) min-w-56"
-					align="end"
-				>
+				<DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) min-w-56" align="end">
 					<DropdownMenuGroup>
 						<DropdownMenuItem>
 							<Link href="/" className="w-full">

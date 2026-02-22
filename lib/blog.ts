@@ -5,8 +5,8 @@ import fg from "fast-glob";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-// import { VIEW_EXPIRATION } from '@/utils'
-// import { redis } from './redis'
+import { VIEW_EXPIRATION } from "@/lib/constants";
+import { redis } from "./redis";
 
 interface Post {
 	slug: string;
@@ -18,7 +18,7 @@ interface Post {
 	readingTime: string;
 	words: number;
 	content: string;
-	// views: number
+	views: number;
 }
 
 function isSlug(slug: string): boolean {
@@ -33,21 +33,22 @@ function getFiles() {
 	return fg.sync("posts/*.mdx", { cwd: process.cwd() });
 }
 
-export async function getAllPosts(): Promise<Post[]> {
+export async function getAllPosts(tag?: string, fetchViews = true): Promise<Post[]> {
 	const files = getFiles();
 
 	const posts = await Promise.all(
 		files.map(async (filePath) => {
 			const slug = getSlug(filePath);
-			const post = await getPostBySlug(slug, false);
+			const post = await getPostBySlug(slug, fetchViews);
 
 			return post as Post;
 		}),
 	);
 
 	return posts
-		.filter(Boolean)
-		.sort((a, b) => dayjs(b.date).unix() - dayjs(a.date).unix());
+    .filter(Boolean)
+    .sort((a, b) => dayjs(b.date).unix() - dayjs(a.date).unix())
+    .filter((post) => (tag ? post.tags.includes(tag) : true));
 }
 
 export function getSlugs(): string[] {
@@ -56,16 +57,31 @@ export function getSlugs(): string[] {
 	return files.map(getSlug);
 }
 
-export function getTags(posts: Post[]): string[] {
-	const tags = posts.flatMap((post) => post.tags);
+export async function getTags(): Promise<string[]> {
+	const files = getFiles();
 
-	return [...new Set(tags)];
+  const tags = new Set<string>();
+  
+  await Promise.all(
+    files.map(async (filePath) => {
+      const source = await fs.promises.readFile(filePath, "utf-8").then(data => matter(data));
+      
+      if (Array.isArray(source.data.tags)) {
+        source.data.tags.forEach((tag: string) => {
+          if (tags.has(tag)) {
+            return;
+          }
+
+          tags.add(tag);
+        });
+      }
+    }),
+  );
+
+  return Array.from(tags);
 }
 
-export async function getPostBySlug(
-	slug: string,
-	fetchViews = true,
-): Promise<Post | null> {
+export async function getPostBySlug(slug: string, fetchViews = true): Promise<Post | null> {
 	if (!isSlug(slug)) {
 		return null;
 	}
@@ -81,12 +97,12 @@ export async function getPostBySlug(
 			content,
 		} = matter(source);
 
-		// const views = fetchViews
-		//   ? await redis
-		//       .get(`posts:${slug}`)
-		//       .then(Number)
-		//       .catch(() => 0)
-		//   : 0
+		const views = fetchViews
+			? await redis
+					.get(`posts:${slug}`)
+					.then(Number)
+					.catch(() => 0)
+			: 0;
 
 		return {
 			slug,
@@ -98,28 +114,26 @@ export async function getPostBySlug(
 			readingTime: times.text,
 			words: times.words,
 			content,
-			// views,
+			views,
 		};
 	} catch {
 		return null;
 	}
 }
 
-export async function addViewToPost({
-	slug,
-	ip,
-}: {
-	slug: string;
-	ip: string;
-}) {
-	// const isViewed = await redis.get(`posts:${slug}:ips:${ip}`)
+export async function addViewToPost({ slug, ip }: { slug: string; ip: string | null }) {
+	if (!ip) {
+		return false;
+	}
 
-	// if (isViewed) {
-	//   return false
-	// }
+	const isViewed = await redis.get(`posts:${slug}:ips:${ip}`);
 
-	// await redis.set(`posts:${slug}:ips:${ip}`, 'true', 'EX', VIEW_EXPIRATION)
-	// await redis.incr(`posts:${slug}`)
+	if (isViewed) {
+		return false;
+	}
+
+	await redis.set(`posts:${slug}:ips:${ip}`, "true", "EX", VIEW_EXPIRATION);
+	await redis.incr(`posts:${slug}`);
 
 	return true;
 }

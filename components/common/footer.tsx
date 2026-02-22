@@ -5,12 +5,7 @@ export function Footer() {
 		<footer className="py-10 flex items-center justify-center">
 			<p>
 				Made with ♥ by{" "}
-				<Link
-					href="https://github.com/izakdvlpr"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="underline"
-				>
+				<Link href="https://github.com/izakdvlpr" target="_blank" rel="noopener noreferrer" className="underline">
 					{"  "}
 					Izak
 				</Link>

@@ -11,22 +11,33 @@ export const metadata: Metadata = {
 	title: "Isaque Lima » Blog",
 };
 
-export default async function PostListPage() {
-	const posts = await getAllPosts();
-	const tags = getTags(posts);
+interface PostListPageProps {
+  searchParams: Promise<{
+    tag?: string;
+  }>;
+}
+
+export default async function PostListPage({ searchParams }: PostListPageProps) {
+	const { tag } = await searchParams;
+  
+	const posts = await getAllPosts(tag);
+	const tags = await getTags();
 
 	return (
 		<main className="mt-10 flex flex-col gap-4">
 			<h1 className="text-3xl font-bold">Blog</h1>
 
-			<p>
-				A blog about technology, programming, and everything else I find
-				interesting.
-			</p>
+			<p>A blog about technology, programming, and everything else I find interesting.</p>
 
 			<div className="flex items-center gap-2">
+        <Link href="/blog">
+          <Badge>
+            All
+          </Badge>
+        </Link>
+        
 				{tags.map((tag) => (
-					<Link href={`/blog?tags=${tag}`} key={tag}>
+					<Link href={`/blog?tag=${tag}`} key={tag}>
 						<Badge>{tag}</Badge>
 					</Link>
 				))}
@@ -40,14 +51,14 @@ export default async function PostListPage() {
 							alt={post.title}
 							width={250}
 							height={150}
-							className="rounded-md grayscale shadow-lg"
+							className="rounded-md grayscale shadow-lg md:flex hidden"
 						/>
 
-						<div className="ml-4 flex flex-col justify-center gap-2">
+						<div className="flex flex-col justify-center gap-2 md:ml-4 ml-0">
 							<h2 className="text-3xl font-bold">{post.title}</h2>
 
 							<p className="text-sm text-black">
-								{post.date} • {post.words} words • {post.readingTime}
+								{post.date} • {post.words} words • {post.readingTime} • {post.views} views
 							</p>
 						</div>
 					</article>

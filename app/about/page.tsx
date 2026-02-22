@@ -13,10 +13,7 @@ export default function AboutPage() {
 
 		const monthDiff = today.getMonth() - birthDate.getMonth();
 
-		if (
-			monthDiff < 0 ||
-			(monthDiff === 0 && today.getDate() < birthDate.getDate())
-		) {
+		if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
 			age--;
 		}
 
@@ -28,14 +25,13 @@ export default function AboutPage() {
 			<h1 className="text-3xl font-bold">About</h1>
 
 			<p className="text-lg text-black">
-				I'm Isaque Lima, a {getAge()}-year-old systems analyst holding a degree
-				in Systems Analysis and Development from the University of Vila Velha.
-				I'm passionate about technology and programming.
+				I'm Isaque Lima, a {getAge()}-year-old systems analyst holding a degree in Systems Analysis and Development from
+				the University of Vila Velha. I'm passionate about technology and programming.
 			</p>
 
 			<p className="text-lg text-black">
-				I've been working as a developer since 2018, building experience with
-				TypeScript, React and Node.js. Currently, I work at{" "}
+				I've been working as a developer since 2018, building experience with TypeScript, React and Node.js. Currently,
+				I work at{" "}
 				<a
 					href="https://strim.com.br"
 					target="_blank"
@@ -44,14 +40,12 @@ export default function AboutPage() {
 				>
 					Strim
 				</a>
-				, an asset integrity startup, where I develop modern web applications,
-				API integrations, and scalable solutions.
+				, an asset integrity startup, where I develop modern web applications, API integrations, and scalable solutions.
 			</p>
 
 			<p className="text-lg text-black">
-				I'm constantly improving my skills in software architecture, performance
-				optimization, and full-stack development, aiming to create practical and
-				innovative solutions that positively impact people and businesses.
+				I'm constantly improving my skills in software architecture, performance optimization, and full-stack
+				development, aiming to create practical and innovative solutions that positively impact people and businesses.
 			</p>
 		</main>
 	);

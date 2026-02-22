@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { env } from "./env";
 
-export interface Programming {
+export interface DiscordActivity {
 	largeImage: string;
 	largeText: string;
 	smallImage: string;
@@ -12,21 +12,37 @@ export interface Programming {
 	time: string;
 }
 
-export interface Music {
-	album: string;
-	albumArtUrl: string;
+export interface Discord {
+	activities: {
+		editor: DiscordActivity | null;
+	};
+	recentPlayed: {
+		id: string;
+		gameName: string;
+		streakCountDays: number;
+		playedTimeSeconds: number;
+		playedAt: string;
+		iconUrl: string;
+		coverImageUrl: string;
+	}[];
+}
+
+export interface LastfmMusic {
+	name: string;
 	artist: string;
-	song: string;
-	time: string;
-	trackId: string;
+	imageUrl: string;
+	album: string;
+	url: string;
+	date: string | null;
 }
 
-export interface ListenToMusic {
-	now: Music | null;
-	last: Music | null;
+export interface Lastfm {
+	nowPlaying: LastfmMusic | null;
+	lastPlayed: LastfmMusic | null;
+	tracks: LastfmMusic[];
 }
 
-export interface CodingTime {
+export interface Wakatime {
 	allTime: string;
 	last30Days: string;
 	last7Days: string;
@@ -34,37 +50,29 @@ export interface CodingTime {
 	topLanguage: string | null;
 }
 
-export interface ContributionData {
-	date: string;
-	count: number;
-}
-
-export interface Contributors {
-	data: ContributionData[];
+export interface Github {
 	totalContributions: number;
 	lastPushedAt: string;
-}
-
-export interface Stats {
-	programming: Programming;
-	listenToMusic: ListenToMusic;
-	contributors: Contributors | null;
-	codingTime: CodingTime | null;
+	items: {
+		date: string;
+		count: number;
+	}[];
 }
 
 export const api = axios.create({
 	baseURL: `${env.NEXT_PUBLIC_BASE_URL}/api`,
+	adapter: "fetch",
+	fetchOptions: {
+		next: {
+			revalidate: 60,
+		},
+	},
 });
 
-export async function getStats() {
-	const { data } = await api.get<Stats>("/stats", {
-		adapter: "fetch",
-		fetchOptions: {
-			next: {
-				revalidate: 60,
-			},
-		},
-	});
+export const getDiscord = async () => api.get<Discord>("/now/discord").then(({ data }) => data);
 
-	return data;
-}
+export const getLastfm = async () => api.get<Lastfm>("/now/lastfm").then(({ data }) => data);
+
+export const getWakatime = async () => api.get<Wakatime>("/now/wakatime").then(({ data }) => data);
+
+export const getGithub = async () => api.get<Github>("/now/github").then(({ data }) => data);

@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ReportView } from "@/components/pages/blog/details/report-view";
 import { Badge } from "@/components/ui/badge";
 import { MDXRender } from "@/components/ui/mdx/mdx-render";
-import { getPostBySlug, getSlugs } from "@/lib/blog";
-import { PUBLIC_URL } from "@/utils";
+import { addViewToPost, getPostBySlug, getSlugs } from "@/lib/blog";
+import { PUBLIC_URL } from "@/lib/constants";
+import { getIp } from "@/utils/get-ip";
 
 interface PostDetailsPageProps {
 	params: Promise<{ slug: string }>;
@@ -20,9 +20,7 @@ export function generateStaticParams(): { slug: string }[] {
 	return slugs.slice(0, 10).map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-	params,
-}: PostDetailsPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PostDetailsPageProps): Promise<Metadata> {
 	const { slug } = await params;
 
 	const post = await getPostBySlug(slug);
@@ -50,7 +48,7 @@ export async function generateMetadata({
 			publishedTime: new Date(post.date ?? 0).toISOString(),
 			images: [
 				{
-					url: `${PUBLIC_URL}/api/og?title=${encodeURIComponent(post.title)}`,
+					url: `${PUBLIC_URL}/${post.thumbnail}`,
 					width: 1200,
 					height: 630,
 				},
@@ -64,7 +62,7 @@ export async function generateMetadata({
 			site: "@izakdvlpr",
 			images: [
 				{
-					url: `${PUBLIC_URL}/api/og?title=${encodeURIComponent(post.title)}`,
+					url: `${PUBLIC_URL}/${post.thumbnail}`,
 					width: 1200,
 					height: 630,
 				},
@@ -82,25 +80,27 @@ export default async function PostPage({ params }: PostDetailsPageProps) {
 		notFound();
 	}
 
+	const ip = await getIp();
+
+	await addViewToPost({ slug, ip });
+
 	return (
 		<main className="mt-10 flex flex-col">
 			<section className="mb-6 flex flex-col gap-4">
 				<h1 className="text-3xl font-extrabold">{post.title}</h1>
 
 				<p className="text-sm text-black">
-					{post.date} • {post.words} words • {post.readingTime}
+					{post.date} • {post.words} words • {post.readingTime} • {post.views} views
 				</p>
 
 				<div className="flex gap-2">
 					{post.tags.map((tag) => (
-						<Link href={`/blog?tags=${tag}`} key={tag}>
+						<Link href={`/blog?tag=${tag}`} key={tag}>
 							<Badge>{tag}</Badge>
 						</Link>
 					))}
 				</div>
 			</section>
-
-			<ReportView slug={slug} />
 
 			<MDXRender content={post.content} />
 		</main>

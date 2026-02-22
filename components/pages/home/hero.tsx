@@ -73,22 +73,15 @@ export function Hero() {
 	return (
 		<section className="my-28 flex items-center justify-between">
 			<div className="flex flex-col gap-4">
-				<p className="text-4xl font-bold">Hey, i'm Isaque.</p>
+				<p className="text-4xl font-bold">Hey, I'm Isaque.</p>
 
-				<p className="max-w-[400px] text-xl">
-					Full Stack Developer. Passionate about programming, technology and
-					pizza.
+				<p className="max-w-100 text-xl">
+					Full Stack Developer. Passionate about programming, technology and pizza.
 				</p>
 
 				<div className="flex items-center gap-2 flex-wrap">
 					{socials.map((social) => (
-						<Button
-							type="button"
-							size="icon"
-							variant="outline"
-							key={social.name}
-							asChild
-						>
+						<Button type="button" size="icon" variant="outline" key={social.name} asChild>
 							<Link href={social.url} target="_blank" rel="noopener noreferrer">
 								<social.icon className="text-black" />
 							</Link>

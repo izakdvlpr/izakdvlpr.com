@@ -2,43 +2,83 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { ListenToMusicWidget } from "./listen-to-music-widget";
-import { ProgrammingWidget } from "./programming-widget";
-import { CodingTimeWidget } from "./coding-time-widget";
-import { getStats, Stats } from "@/lib/api";
-import { ContributorsWidget } from "./contributors-widget";
+import { LastfmNowPlayingWidget } from "./lastfm-now-playing-widget";
+import { DiscordEditorWidget } from "./discord-editor-widget";
+import { WakatimeWidget } from "./wakatime-widget";
+import {
+	type Discord,
+	type Github,
+	type Lastfm,
+	type Wakatime,
+	getDiscord,
+	getGithub,
+	getLastfm,
+	getWakatime,
+} from "@/lib/api";
+import { GithubContributorsWidget } from "./github-contributors-widget";
+import { LastfmLastTracksPlayedWidget } from './lastfm-last-tracks';
+import { DiscordRecentPlayedWidget } from './discord-recent-played';
 
 interface WidgetsProps {
-	initialData: { stats: Stats };
+	initialData: {
+		discord: Discord;
+		lastfm: Lastfm;
+		wakatime: Wakatime;
+		github: Github;
+	};
 }
 
 export function Widgets({ initialData }: WidgetsProps) {
-	const statsResponse = useQuery({
-		queryKey: ["stats"],
-		queryFn: () => getStats(),
+	const discordResponse = useQuery({
+		queryKey: ["discord"],
+		queryFn: () => getDiscord(),
 		staleTime: 1000 * 60,
-		initialData: initialData.stats,
+		initialData: initialData.discord,
+	});
+
+	const lastfmResponse = useQuery({
+		queryKey: ["lastfm"],
+		queryFn: () => getLastfm(),
+		staleTime: 1000 * 60,
+		initialData: initialData.lastfm,
+	});
+
+	const wakatimeResponse = useQuery({
+		queryKey: ["wakatime"],
+		queryFn: () => getWakatime(),
+		staleTime: 1000 * 60,
+		initialData: initialData.wakatime,
+	});
+
+	const githubResponse = useQuery({
+		queryKey: ["github"],
+		queryFn: () => getGithub(),
+		staleTime: 1000 * 60,
+		initialData: initialData.github,
 	});
 
 	return (
 		<div className="grid gap-4 md:grid-cols-4 grid-cols-1">
-			{statsResponse.isLoading && (
-				<>
-					<div className="col-span-2 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
-					<div className="col-span-2 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
-					<div className="col-span-3 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
-					<div className="col-span-1 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
-				</>
-			)}
+			{discordResponse.isLoading &&
+				lastfmResponse.isLoading &&
+				wakatimeResponse.isLoading &&
+				githubResponse.isLoading && (
+					<>
+						<div className="col-span-2 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
+						<div className="col-span-2 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
+						<div className="col-span-3 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
+						<div className="col-span-1 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
+					</>
+				)}
 
-			{statsResponse.data && (
+			{discordResponse.data && lastfmResponse.data && wakatimeResponse.data && githubResponse.data && (
 				<>
-					<ProgrammingWidget programming={statsResponse.data?.programming} />
-					<ListenToMusicWidget
-						listenToMusic={statsResponse.data?.listenToMusic}
-					/>
-					<ContributorsWidget contributors={statsResponse.data?.contributors} />
-					<CodingTimeWidget codingTime={statsResponse.data?.codingTime} />
+					<DiscordEditorWidget discord={discordResponse.data} />
+					<LastfmNowPlayingWidget lastfm={lastfmResponse.data} />
+					<GithubContributorsWidget github={githubResponse.data} />
+					<WakatimeWidget wakatime={wakatimeResponse.data} />
+          <DiscordRecentPlayedWidget discord={discordResponse.data} />
+          <LastfmLastTracksPlayedWidget lastfm={lastfmResponse.data} />
 				</>
 			)}
 		</div>
