@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: PostDetailsPageProps): Promis
 			publishedTime: new Date(post.date ?? 0).toISOString(),
 			images: [
 				{
-					url: `${PUBLIC_URL}/${post.thumbnail}`,
+					url: `${PUBLIC_URL}${post.thumbnail}`,
 					width: 1200,
 					height: 630,
 				},
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: PostDetailsPageProps): Promis
 			site: `@${USERNAME}`,
 			images: [
 				{
-					url: `${PUBLIC_URL}/${post.thumbnail}`,
+					url: `${PUBLIC_URL}${post.thumbnail}`,
 					width: 1200,
 					height: 630,
 				},
