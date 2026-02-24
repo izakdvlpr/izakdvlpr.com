@@ -32,10 +32,12 @@ export async function generateMetadata({ params }: PostDetailsPageProps): Promis
 
 	const title = `Isaque Lima » ${post.title}`;
 	const url = `${PUBLIC_URL}/blog/${slug}`;
+  
+	const description = `${post.description}\n\n${post.date} • ${post.words} words • ${post.readingTime} • ${post.views} views\n\n${post.tags.join(", ")}\n\nBy @${USERNAME}`;
 
 	return {
 		title,
-		description: post.description,
+		description,
 		alternates: {
 			canonical: url,
 		},
@@ -44,7 +46,7 @@ export async function generateMetadata({ params }: PostDetailsPageProps): Promis
 			title,
 			type: "article",
 			section: "Blog",
-			description: post.description,
+			description,
 			tags: post.tags,
 			publishedTime: new Date(post.date ?? 0).toISOString(),
 			images: [
@@ -58,7 +60,7 @@ export async function generateMetadata({ params }: PostDetailsPageProps): Promis
 		twitter: {
 			card: "summary_large_image",
 			creator: `@${USERNAME}`,
-			description: post.description,
+			description,
 			title,
 			site: `@${USERNAME}`,
 			images: [
