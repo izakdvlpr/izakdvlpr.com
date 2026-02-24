@@ -53,7 +53,7 @@ export default async function PostListPage({ searchParams }: PostListPageProps) 
 								className="rounded-md grayscale shadow-lg md:flex hidden"
 							/>
 
-							<div className="flex flex-col justify-center gap-2 md:ml-4 ml-0">
+							<div className="flex flex-col justify-center gap-4 md:ml-4 ml-0">
 								<h2 className="text-3xl font-bold">{post.title}</h2>
                 
                 <p className="text-lg text-gray-600">{post.description}</p>
@@ -61,6 +61,12 @@ export default async function PostListPage({ searchParams }: PostListPageProps) 
 								<p className="text-sm text-black">
 									{post.date} • {post.words} words • {post.readingTime} • {post.views} views
 								</p>
+                
+                <div className="flex items-center gap-2">
+                  {post.tags.map((tag) => (
+                    <Badge variant="outline" key={tag}>{tag}</Badge>
+                  ))}
+                </div>
 							</div>
 						</div>
 
