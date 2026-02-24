@@ -75,9 +75,7 @@ export function Hero() {
 			<div className="flex flex-col gap-4">
 				<p className="text-4xl font-bold">Hey, I'm Isaque.</p>
 
-				<p className="max-w-100 text-xl">
-					Full Stack Developer. Passionate about programming, technology and pizza.
-				</p>
+				<p className="max-w-100 text-xl">Full Stack Developer. Passionate about programming, technology and pizza.</p>
 
 				<div className="flex items-center gap-2 flex-wrap">
 					{socials.map((social) => (

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Code2, Menu } from "lucide-react";
 
 import { cn } from "@/utils";
 import {
@@ -12,7 +13,6 @@ import {
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { Menu } from "lucide-react";
 
 const links = [
 	{ title: "About", href: "/about" },
@@ -27,7 +27,11 @@ export function Header() {
 
 	return (
 		<header className="flex items-center justify-between">
-			<Link href="/">
+			<Link href="/" className="flex items-center gap-2">
+				<Button type="button" size="icon" variant="outline" className="[&_svg]:size-5">
+					<Code2 className="text-black" />
+				</Button>
+
 				<h1 className="text-2xl font-bold">izakdvlpr</h1>
 			</Link>
 
@@ -45,7 +49,7 @@ export function Header() {
 
 			<DropdownMenu>
 				<DropdownMenuTrigger className="md:hidden flex" asChild>
-					<Button type="button" size="icon" variant="outline">
+					<Button type="button" size="icon" variant="outline" className="[&_svg]:size-5">
 						<Menu />
 					</Button>
 				</DropdownMenuTrigger>
@@ -54,7 +58,7 @@ export function Header() {
 					<DropdownMenuGroup>
 						<DropdownMenuItem>
 							<Link href="/" className="w-full">
-								Início
+								Home
 							</Link>
 						</DropdownMenuItem>
 

@@ -20,7 +20,7 @@ const setup: SetupCategory[] = [
 		items: [
 			{
 				name: "Laptop",
-				description: "Apple MacBook Pro 14\" 2021 — 16GB RAM",
+				description: 'Apple MacBook Pro 14" 2021 — 16GB RAM',
 			},
 		],
 	},
@@ -75,7 +75,7 @@ const setup: SetupCategory[] = [
 		items: [
 			{
 				name: "Monitor",
-				description: "LG 26WQ500 — 26\" IPS Ultra Wide, 75Hz, Full HD, 1ms, FreeSync Premium, HDR10, 99% sRGB",
+				description: 'LG 26WQ500 — 26" IPS Ultra Wide, 75Hz, Full HD, 1ms, FreeSync Premium, HDR10, 99% sRGB',
 			},
 			{
 				name: "Keyboard",
@@ -139,11 +139,9 @@ const setup: SetupCategory[] = [
 export default function SetupPage() {
 	return (
 		<main className="mt-10 flex flex-col gap-4">
-      <h1 className="text-3xl font-bold">Setup</h1>
-      
-      <p className="text-lg text-black dark:text-white/70">
-        Hardware and peripherals I use on a daily basis.
-      </p>
+			<h1 className="text-3xl font-bold">Setup</h1>
+
+			<p className="text-lg text-black dark:text-white/70">Hardware and peripherals I use on a daily basis.</p>
 
 			<div className="flex flex-col gap-4">
 				{setup.map((category) => (
@@ -155,13 +153,11 @@ export default function SetupPage() {
 									key={`${item.name}-${index}`}
 									className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 py-2 border-b border-dashed last:border-0"
 								>
-									<span className="font-medium text-sm text-black/60 dark:text-white/50 uppercase tracking-wide min-w-[140px]">
+									<span className="font-medium text-sm text-black/60 dark:text-white/50 uppercase tracking-wide min-w-35">
 										{item.name}
 									</span>
 									{item.description && (
-										<span className="text-base text-black dark:text-white/90 sm:text-right">
-											{item.description}
-										</span>
+										<span className="text-base text-black dark:text-white/90 sm:text-right">{item.description}</span>
 									)}
 								</li>
 							))}

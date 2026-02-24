@@ -4,7 +4,7 @@ import { GitBranch } from "lucide-react";
 import HeatMap, { SVGProps } from "@uiw/react-heat-map";
 import { useEffect, useRef, useState } from "react";
 
-import type { Github } from "@/lib/api";
+import type { Github } from "@/lib/types";
 
 interface GithubContributorsWidgetProps {
 	github: Github | null;
@@ -105,7 +105,7 @@ export function GithubContributorsWidget({ github }: GithubContributorsWidgetPro
 				<p className="text-sm text-gray-500">No contribution data available.</p>
 			)}
 
-			{github && (
+			{github?.lastPushedAt && (
 				<p className="mt-2 text-sm text-gray-600">
 					Last pushed on{" "}
 					{new Date(github.lastPushedAt).toLocaleDateString("en-US", {

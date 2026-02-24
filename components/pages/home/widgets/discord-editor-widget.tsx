@@ -3,7 +3,7 @@
 import { Code } from "lucide-react";
 import Image from "next/image";
 
-import type { Discord } from "@/lib/api";
+import type { Discord } from "@/lib/types";
 
 interface DiscordEditorWidgetProps {
 	discord: Discord | null;
@@ -23,7 +23,7 @@ export function DiscordEditorWidget({ discord }: DiscordEditorWidgetProps) {
 					<div className="w-16 h-16 relative">
 						<Image
 							src={discord?.activities?.editor?.largeImage ?? ""}
-							alt={discord?.activities?.editor?.largeText ?? ""}
+							alt={discord?.activities?.editor?.largeText ?? ""}
 							title={discord?.activities?.editor?.largeText ?? ""}
 							width={64}
 							height={64}

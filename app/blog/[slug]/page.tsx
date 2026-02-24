@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { MDXRender } from "@/components/ui/mdx/mdx-render";
 import { addViewToPost, getPostBySlug, getSlugs } from "@/lib/blog";
-import { PUBLIC_URL } from "@/lib/constants";
+import { PUBLIC_URL, USERNAME } from "@/lib/constants";
 import { getIp } from "@/utils/get-ip";
 
 interface PostDetailsPageProps {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PostDetailsPageProps): Promis
 		return {};
 	}
 
-	const title = `${post.title} » Isaque Lima`;
+	const title = `Isaque Lima » ${post.title}`;
 	const url = `${PUBLIC_URL}/blog/${slug}`;
 
 	return {
@@ -56,10 +56,10 @@ export async function generateMetadata({ params }: PostDetailsPageProps): Promis
 		},
 		twitter: {
 			card: "summary_large_image",
-			creator: "@izakdvlpr",
+			creator: `@${USERNAME}`,
 			description: post.description,
 			title,
-			site: "@izakdvlpr",
+			site: `@${USERNAME}`,
 			images: [
 				{
 					url: `${PUBLIC_URL}/${post.thumbnail}`,

@@ -2,14 +2,14 @@ import { Disc3 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import type { Lastfm } from "@/lib/api";
+import type { Lastfm } from "@/lib/types";
 
 interface LastfmNowPlayingWidgetProps {
 	lastfm: Lastfm;
 }
 
 export function LastfmNowPlayingWidget({ lastfm }: LastfmNowPlayingWidgetProps) {
-	const track = lastfm.nowPlaying ?? lastfm.lastPlayed;
+	const track = lastfm?.nowPlaying ?? lastfm?.lastPlayed;
 
 	return (
 		<div className="md:col-span-2 col-span-1 h-37.5 p-5 flex flex-col gap-2 rounded-md bg-gray-100">

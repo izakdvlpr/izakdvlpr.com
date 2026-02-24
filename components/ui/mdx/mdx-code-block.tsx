@@ -9,19 +9,19 @@ type MDXCodeBlockProps = PropsWithChildren<HTMLAttributes<HTMLPreElement>>;
 
 export function MDXCodeBlock(props: MDXCodeBlockProps) {
 	const preProps = (props.children as any)?.props;
-  const code = preProps?.children as string;
+	const code = preProps?.children as string;
 	const language = preProps?.className?.replace("language-", "")?.toUpperCase();
 
 	function handleCopyCode() {
 		try {
-      navigator.clipboard.writeText(code);
+			navigator.clipboard.writeText(code);
 
-      toast.success("Code copied to clipboard!");
-    } catch (error) {
-      console.error(error);
+			toast.success("Code copied to clipboard!");
+		} catch (error) {
+			console.error(error);
 
-      toast.error("Failed to copy code to clipboard.");
-    }
+			toast.error("Failed to copy code to clipboard.");
+		}
 	}
 
 	return (

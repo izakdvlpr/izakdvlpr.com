@@ -27,6 +27,9 @@ const description = "Full Stack Developer";
 
 export const metadata: Metadata = {
 	title,
+	icons: {
+		icon: "/favicon.ico",
+	},
 	description,
 	alternates: {
 		canonical: PUBLIC_URL,

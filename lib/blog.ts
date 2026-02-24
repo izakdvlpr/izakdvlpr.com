@@ -46,9 +46,9 @@ export async function getAllPosts(tag?: string, fetchViews = true): Promise<Post
 	);
 
 	return posts
-    .filter(Boolean)
-    .sort((a, b) => dayjs(b.date).unix() - dayjs(a.date).unix())
-    .filter((post) => (tag ? post.tags.includes(tag) : true));
+		.filter(Boolean)
+		.sort((a, b) => dayjs(b.date).unix() - dayjs(a.date).unix())
+		.filter((post) => (tag ? post.tags.includes(tag) : true));
 }
 
 export function getSlugs(): string[] {
@@ -60,25 +60,25 @@ export function getSlugs(): string[] {
 export async function getTags(): Promise<string[]> {
 	const files = getFiles();
 
-  const tags = new Set<string>();
-  
-  await Promise.all(
-    files.map(async (filePath) => {
-      const source = await fs.promises.readFile(filePath, "utf-8").then(data => matter(data));
-      
-      if (Array.isArray(source.data.tags)) {
-        source.data.tags.forEach((tag: string) => {
-          if (tags.has(tag)) {
-            return;
-          }
+	const tags = new Set<string>();
 
-          tags.add(tag);
-        });
-      }
-    }),
-  );
+	await Promise.all(
+		files.map(async (filePath) => {
+			const source = await fs.promises.readFile(filePath, "utf-8").then((data) => matter(data));
 
-  return Array.from(tags);
+			if (Array.isArray(source.data.tags)) {
+				source.data.tags.forEach((tag: string) => {
+					if (tags.has(tag)) {
+						return;
+					}
+
+					tags.add(tag);
+				});
+			}
+		}),
+	);
+
+	return Array.from(tags);
 }
 
 export async function getPostBySlug(slug: string, fetchViews = true): Promise<Post | null> {

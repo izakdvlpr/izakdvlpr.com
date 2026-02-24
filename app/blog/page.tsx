@@ -12,14 +12,14 @@ export const metadata: Metadata = {
 };
 
 interface PostListPageProps {
-  searchParams: Promise<{
-    tag?: string;
-  }>;
+	searchParams: Promise<{
+		tag?: string;
+	}>;
 }
 
 export default async function PostListPage({ searchParams }: PostListPageProps) {
 	const { tag } = await searchParams;
-  
+
 	const posts = await getAllPosts(tag);
 	const tags = await getTags();
 
@@ -29,13 +29,11 @@ export default async function PostListPage({ searchParams }: PostListPageProps) 
 
 			<p>A blog about technology, programming, and everything else I find interesting.</p>
 
-			<div className="flex items-center gap-2">
-        <Link href="/blog">
-          <Badge>
-            All
-          </Badge>
-        </Link>
-        
+			<div className="flex flex-wrap items-center gap-2">
+				<Link href="/blog">
+					<Badge>All</Badge>
+				</Link>
+
 				{tags.map((tag) => (
 					<Link href={`/blog?tag=${tag}`} key={tag}>
 						<Badge>{tag}</Badge>
@@ -43,24 +41,28 @@ export default async function PostListPage({ searchParams }: PostListPageProps) 
 				))}
 			</div>
 
-			{posts.map((post) => (
+			{posts.map((post, index) => (
 				<Link key={post.slug} href={`/blog/${post.slug}`}>
-					<article className="flex items-center">
-						<Image
-							src={post.thumbnail}
-							alt={post.title}
-							width={250}
-							height={150}
-							className="rounded-md grayscale shadow-lg md:flex hidden"
-						/>
+					<article className="flex flex-col gap-4">
+						<div className="flex items-center">
+							<Image
+								src={post.thumbnail}
+								alt={post.title}
+								width={250}
+								height={150}
+								className="rounded-md grayscale shadow-lg md:flex hidden"
+							/>
 
-						<div className="flex flex-col justify-center gap-2 md:ml-4 ml-0">
-							<h2 className="text-3xl font-bold">{post.title}</h2>
+							<div className="flex flex-col justify-center gap-2 md:ml-4 ml-0">
+								<h2 className="text-3xl font-bold">{post.title}</h2>
 
-							<p className="text-sm text-black">
-								{post.date} • {post.words} words • {post.readingTime} • {post.views} views
-							</p>
+								<p className="text-sm text-black">
+									{post.date} • {post.words} words • {post.readingTime} • {post.views} views
+								</p>
+							</div>
 						</div>
+
+						{index !== posts.length - 1 && <hr className="my-4 border-gray-100" />}
 					</article>
 				</Link>
 			))}

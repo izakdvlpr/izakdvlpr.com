@@ -1,27 +1,22 @@
 import { Widgets } from "@/components/pages/home/widgets";
 import { Hero } from "@/components/pages/home/hero";
-import { getDiscord, getGithub, getLastfm, getWakatime } from "@/lib/api";
+import { getStats } from "@/lib/api";
+import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
+export const metadata: Metadata = {
+	title: "Isaque Lima » Home",
+};
+
 export default async function HomePage() {
-	const discord = await getDiscord();
-	const lastfm = await getLastfm();
-	const wakatime = await getWakatime();
-	const github = await getGithub();
+	const stats = await getStats();
 
 	return (
 		<main className="flex flex-col gap-4">
 			<Hero />
 
-			<Widgets
-				initialData={{
-					discord,
-					lastfm,
-					wakatime,
-					github,
-				}}
-			/>
+			<Widgets initialData={{ stats }} />
 		</main>
 	);
 }
