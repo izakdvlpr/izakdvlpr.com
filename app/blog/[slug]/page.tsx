@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import NextImage from "next/image";
 
 import { Badge } from "@/components/ui/badge";
 import { MDXRender } from "@/components/ui/mdx/mdx-render";
@@ -100,6 +101,14 @@ export default async function PostPage({ params }: PostDetailsPageProps) {
 						</Link>
 					))}
 				</div>
+        
+        <NextImage
+          src={post.thumbnail}
+          alt={post.title}
+          width={1200}
+          height={630}
+          className="rounded-md object-cover grayscale shadow-lg"
+        />
 			</section>
 
 			<MDXRender content={post.content} />

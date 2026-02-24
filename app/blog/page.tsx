@@ -55,6 +55,8 @@ export default async function PostListPage({ searchParams }: PostListPageProps) 
 
 							<div className="flex flex-col justify-center gap-2 md:ml-4 ml-0">
 								<h2 className="text-3xl font-bold">{post.title}</h2>
+                
+                <p className="text-lg text-gray-600">{post.description}</p>
 
 								<p className="text-sm text-black">
 									{post.date} • {post.words} words • {post.readingTime} • {post.views} views
