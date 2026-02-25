@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Dot, DotIcon, Languages } from "lucide-react";
+import { Bot, DotIcon, Languages, Rss } from "lucide-react";
 import NextImage from "next/image";
 
 import {
@@ -14,7 +14,15 @@ import { Button } from "../ui/button";
 export function Footer() {
 	return (
 		<footer className="w-full py-10 flex items-center justify-between gap-2">
-			<div />
+			<div className='flex items-center gap-2'>
+        <Link href="/ai">
+          <Bot className="size-5" />
+        </Link>
+        
+        <Link href="/rss.xml" target="_blank" rel="noopener noreferrer">
+          <Rss className="size-5" />
+        </Link>
+      </div>
 
 			<div className="text-sm text-center">
 				<p>

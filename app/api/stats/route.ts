@@ -15,21 +15,27 @@ dayjs.extend(relativeTime);
 dayjs.locale("pt-br");
 
 export async function GET() {
-	const github = await getGithub();
-	const lastfm = await getLastfm();
-	const wakatime = await getWakatime();
-	const discordActivities = await getDiscordActivities();
-	const discordRecentPlayed = await getDiscordRecentPlayed();
-
-	return NextResponse.json({
-		github,
-		lastfm,
-		wakatime,
-		discord: {
-			activities: discordActivities,
-			recentPlayed: discordRecentPlayed,
-		},
-	});
+	try {
+    const github = await getGithub();
+    const lastfm = await getLastfm();
+    const wakatime = await getWakatime();
+    const discordActivities = await getDiscordActivities();
+    const discordRecentPlayed = await getDiscordRecentPlayed();
+  
+    return NextResponse.json({
+      github,
+      lastfm,
+      wakatime,
+      discord: {
+        activities: discordActivities,
+        recentPlayed: discordRecentPlayed,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching stats:", error);
+    
+    return NextResponse.json({ error: "Failed to fetch stats" }, { status: 500 });
+  }
 }
 
 // Github
