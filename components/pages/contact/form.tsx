@@ -31,7 +31,7 @@ export function Form() {
 
 	return (
 		<form className="flex flex-col gap-6" action={submitAction}>
-			<div className="grid grid-cols-2 gap-6">
+			<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 				<Input name="name" placeholder="Your name" required />
 
 				<Input type="email" name="email" placeholder="your@email.com" required />
@@ -41,7 +41,7 @@ export function Form() {
 
 			<Textarea name="message" placeholder="Message" className="min-h-[200px]" required />
 
-			<Button type="submit" className="max-w-44" disabled={isPending}>
+			<Button type="submit" className="w-full md:max-w-44" disabled={isPending}>
 				{isPending ? <Spinner /> : "Send"}
 			</Button>
 		</form>

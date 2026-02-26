@@ -10,10 +10,11 @@ import {
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { socials } from '@/app/contact/page';
 
 export function Footer() {
 	return (
-		<footer className="w-full py-10 flex items-center justify-between gap-2">
+		<footer className="w-full py-10 flex items-center justify-between gap-4 md:flex-row flex-col">
 			<div className='flex items-center gap-2'>
         <Link href="/ai">
           <Bot className="size-5" />
@@ -22,6 +23,12 @@ export function Footer() {
         <Link href="/rss.xml" target="_blank" rel="noopener noreferrer">
           <Rss className="size-5" />
         </Link>
+        
+        {socials.filter(social => ["Github", "LinkedIn", "X", "Discord"].includes(social.name)).map(social => (
+          <Link key={social.name} href={social.url} target="_blank" rel="noopener noreferrer">
+            <social.icon className="size-5" />
+          </Link>
+        ))}
       </div>
 
 			<div className="text-sm text-center">
