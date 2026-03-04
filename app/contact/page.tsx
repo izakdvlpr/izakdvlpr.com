@@ -60,7 +60,7 @@ export const socials: Social[] = [
 	{
 		name: "Bluesky",
 		icon: SiBluesky,
-		url: "https://bsky.app/profile/izakdvlpr.bsky.social",
+		url: "https://bsky.app/profile/izakdvlpr.com",
 	},
 	{
 		name: "Discord",
