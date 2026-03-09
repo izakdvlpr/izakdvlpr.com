@@ -73,9 +73,17 @@ const setup: SetupCategory[] = [
 	{
 		title: "Peripherals",
 		items: [
+      {
+        name: "TV",
+        description: 'LG 55UA8550PSA - Smart TV 55” 4K',
+      },
+      {
+        name: "TV",
+        description: 'LG 24TL520S - Smart TV 24” LED',
+      },
 			{
 				name: "Monitor",
-				description: 'LG 26WQ500 — 26" IPS Ultra Wide, 75Hz, Full HD, 1ms, FreeSync Premium, HDR10, 99% sRGB',
+				description: 'LG 26WQ500 — 26" IPS Ultra Wide',
 			},
 			{
 				name: "Keyboard",
@@ -102,14 +110,18 @@ const setup: SetupCategory[] = [
 				name: "Earbuds",
 				description: "QCY ArcBuds",
 			},
+      {
+				name: "Earbuds",
+				description: "QKZ AK6",
+			},
 		],
 	},
 	{
 		title: "Gaming",
 		items: [
-			{
-				name: "Controller",
-				description: "Sony DualShock 4 — PS4",
+      {
+				name: "Console",
+				description: "PS5 Slim — 825GB",
 			},
 			{
 				name: "Console",
@@ -118,6 +130,14 @@ const setup: SetupCategory[] = [
 			{
 				name: "Console",
 				description: "Nintendo Wii Modded",
+			},
+      {
+				name: "Controller",
+				description: "Sony DualSense 5 — PS5",
+			},
+      {
+				name: "Controller",
+				description: "Sony DualShock 4 — PS4",
 			},
 		],
 	},
