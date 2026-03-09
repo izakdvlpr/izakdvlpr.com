@@ -22,6 +22,18 @@ const setup: SetupCategory[] = [
 				name: "Laptop",
 				description: 'Apple MacBook Pro 14" 2021 — 16GB RAM',
 			},
+      {
+				name: "Mouse",
+				description: "Logitech Pebble 2 M350s Bluetooth",
+			},
+      {
+				name: "Keyboard",
+				description: "Logitech Pebble Keys 2 K380s Bluetooth",
+			},
+      {
+				name: "MousePad",
+				description: "Logitech Desk Mat Studio Series",
+			},
 		],
 	},
 	{
@@ -58,15 +70,15 @@ const setup: SetupCategory[] = [
 		items: [
 			{
 				name: "NVMe SSD",
-				description: "500GB",
+				description: "500GB — WD Blue SN570 M.2 3500MBs Read, 2300MB/s Write",
 			},
 			{
 				name: "SATA SSD",
-				description: "480GB",
+				description: "480GB — Kingston SA400S37 Sata III 500MBs Read, 450MB/s Write",
 			},
 			{
 				name: "SATA SSD",
-				description: "120GB",
+				description: "120GB — Adata SU650 Sata III  520MBs Read, 450MB/s Write",
 			},
 		],
 	},
@@ -75,11 +87,11 @@ const setup: SetupCategory[] = [
 		items: [
       {
         name: "TV",
-        description: 'LG 55UA8550PSA - Smart TV 55” 4K',
+        description: 'LG 55UA8550PSA — Smart TV 55” 4K',
       },
       {
         name: "TV",
-        description: 'LG 24TL520S - Smart TV 24” LED',
+        description: 'LG 24TL520S — Smart TV 24” LED',
       },
 			{
 				name: "Monitor",
