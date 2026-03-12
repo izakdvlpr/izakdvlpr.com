@@ -31,13 +31,12 @@ const projects: Project[] = [
 		tags: ["TypeScript", "TanStack", "NestJS", "PostgreSQL", "Redis"],
 	},
 	{
-		name: "Dataxamas",
+		name: "DataXamas",
 		tagline: "Analytics without the complexity.",
 		description:
 			"A lightweight analytics tracker that monitors page views, visitor origins, devices, browsers and geographic data in real time — similar to Google Analytics but simpler and privacy-focused.",
 		status: "in development",
     liveUrl: "https://dataxamas.izakdvlpr.com",
-    githubUrl: "https://github.com/izakdvlpr/dataxamas",
 		tags: ["TypeScript", "Next.js", "PostgreSQL", "Redis"],
 	},
 	{
