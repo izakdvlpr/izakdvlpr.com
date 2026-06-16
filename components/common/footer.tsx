@@ -14,7 +14,7 @@ import { socials } from '@/app/contact/page';
 
 export function Footer() {
 	return (
-		<footer className="w-full py-10 flex items-center justify-between gap-4 md:flex-row flex-col">
+		<footer className="w-full py-10 flex flex-col items-center justify-between gap-4 md:flex-row md:items-start">
 			<div className='flex items-center gap-2'>
         <Link href="/ai">
           <Bot className="size-5" />
@@ -31,17 +31,25 @@ export function Footer() {
         ))}
       </div>
 
-			<div className="text-sm text-center">
-				<p>
-					Made with ♥ by{" "}
-					<Link href="https://github.com/izakdvlpr" target="_blank" rel="noopener noreferrer" className="underline">
-						{"  "}
-						Isaque Lima
-					</Link>
-				</p>
+			<div className="flex flex-col items-center gap-6">
+        <div className="text-sm text-center">
+          <p>
+            Made with ♥ by{" "}
+            <Link href="https://github.com/izakdvlpr" target="_blank" rel="noopener noreferrer" className="underline">
+              {"  "}
+              Isaque Lima
+            </Link>
+          </p>
 
-				<p>© {new Date().getFullYear()} Isaque Lima. All rights reserved.</p>
-			</div>
+          <p>© {new Date().getFullYear()} Isaque Lima. All rights reserved.</p>
+        </div>
+        
+        <iframe
+          src="http://dataxamas.izakdvlpr.com/widgets/4cb1fc6f-b4d1-4f0e-98ed-017e3042d48f/live?theme=light"
+          width="160"
+          height="50"
+        />
+      </div>
 
 			<div className="flex justify-end">
 				<DropdownMenu>
