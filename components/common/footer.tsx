@@ -11,6 +11,7 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { socials } from '@/app/contact/page';
+import { DATAXAMAS_URL, DATAXAMAS_WEBSITE_ID } from '@/lib/constants';
 
 export function Footer() {
 	return (
@@ -45,7 +46,7 @@ export function Footer() {
         </div>
         
         <iframe
-          src="http://dataxamas.izakdvlpr.com/widgets/4cb1fc6f-b4d1-4f0e-98ed-017e3042d48f/live?theme=light"
+          src={`${DATAXAMAS_URL}/widgets/${DATAXAMAS_WEBSITE_ID}/live?theme=light`}
           width="160"
           height="50"
         />

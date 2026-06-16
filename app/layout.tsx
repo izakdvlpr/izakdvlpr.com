@@ -9,7 +9,7 @@ import { Footer } from "@/components/common/footer";
 import { Header } from "@/components/common/header";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { PUBLIC_URL } from "@/lib/constants";
+import { DATAXAMAS_URL, DATAXAMAS_WEBSITE_ID, PUBLIC_URL } from "@/lib/constants";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 
 const geistSans = Geist({
@@ -61,8 +61,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
 			<head>
 				<Script
 					async
-					src="https://dataxamas.izakdvlpr.com/dataxamas.js"
-					data-website-id="4cb1fc6f-b4d1-4f0e-98ed-017e3042d48f"
+					src={`${DATAXAMAS_URL}/dataxamas.js`}
+					data-website-id={DATAXAMAS_WEBSITE_ID}
 				/>
 
 				<Script
