@@ -63,6 +63,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
 					async
 					src={`${DATAXAMAS_URL}/dataxamas.js`}
 					data-website-id={DATAXAMAS_WEBSITE_ID}
+          data-allow-localhost={true}
 				/>
 
 				<Script
