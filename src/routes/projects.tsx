@@ -2,8 +2,9 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { createFileRoute } from "@tanstack/react-router";
 import { LinkIcon } from "lucide-react";
 
-import { Badge } from "#/components/ui/badge";
-import { Button } from "#/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { projects, type Project } from '@/lib/data';
 
 export const Route = createFileRoute("/projects")({
 	head: () => ({
@@ -11,48 +12,6 @@ export const Route = createFileRoute("/projects")({
 	}),
 	component: ProjectsPage,
 });
-
-interface Project {
-	name: string;
-	tagline: string;
-	description: string;
-	status: "live" | "in development" | "open source";
-	tags: string[];
-	githubUrl?: string;
-	liveUrl?: string;
-}
-
-const projects: Project[] = [
-	{
-		name: "TrackGeek",
-		tagline: "Your personal media diary.",
-		description:
-			"A media tracking platform where you can log and rate anime, manga, books, TV series, and movies. Create custom lists, write reviews, mark favorites, and discover new content through a powerful search. Everything in one place for the true geek.",
-		status: "in development",
-		githubUrl: "https://github.com/TrackGeek",
-		liveUrl: "https://trackgeek.net",
-		tags: ["TypeScript", "TanStack", "NestJS", "PostgreSQL", "Redis"],
-	},
-	{
-		name: "DataXamas",
-		tagline: "Analytics without the complexity.",
-		description:
-			"A lightweight analytics tracker that monitors page views, visitor origins, devices, browsers and geographic data in real time — similar to Google Analytics but simpler and privacy-focused.",
-		status: "in development",
-		liveUrl: "https://dataxamas.izakdvlpr.com",
-		tags: ["TypeScript", "Next.js", "PostgreSQL", "Redis"],
-	},
-	{
-		name: "Hora Judaica",
-		tagline: "The Jewish calendar in your pocket.",
-		description:
-			"A platform for the Jewish community that provides accurate Shabbat times, upcoming Jewish holidays, and the weekly Parasha reading. Users can subscribe to receive all of this information directly via email, keeping them connected to the Jewish calendar wherever they are.",
-		status: "in development",
-		liveUrl: "https://horajudaica.com",
-		githubUrl: "https://github.com/izakdvlpr/horajudaica",
-		tags: ["TypeScript", "Next.js", "Resend", "Node.js"],
-	},
-];
 
 const statusStyles: Record<Project["status"], string> = {
 	live: "bg-green-100 text-green-700 border-green-200",

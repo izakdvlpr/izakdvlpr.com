@@ -2,11 +2,8 @@
   "name": "izakdvlpr",
   "private": true,
   "type": "module",
-  "imports": {
-    "#/*": "./src/*"
-  },
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev --port 25241",
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
@@ -74,11 +71,5 @@
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
     "vitest": "^4.1.5"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lightningcss"
-    ]
   }
 }

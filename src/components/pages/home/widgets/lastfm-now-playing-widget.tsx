@@ -1,7 +1,7 @@
 import { Disc3 } from "lucide-react";
 
-import { Image } from "#/components/ui/image";
-import type { Lastfm } from "#/lib/types";
+import { Image } from "@/components/ui/image";
+import type { Lastfm } from "@/lib/types";
 
 interface LastfmNowPlayingWidgetProps {
 	lastfm: Lastfm;

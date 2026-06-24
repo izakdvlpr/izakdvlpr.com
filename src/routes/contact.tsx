@@ -1,9 +1,9 @@
 import { SiAdobeacrobatreader } from "@icons-pack/react-simple-icons";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Form } from "#/components/pages/contact/form";
-import { Button } from "#/components/ui/button";
-import { socials } from "#/lib/socials";
+import { Form } from "@/components/pages/contact/form";
+import { Button } from "@/components/ui/button";
+import { socials } from "@/lib/data";
 
 export const Route = createFileRoute("/contact")({
 	head: () => ({

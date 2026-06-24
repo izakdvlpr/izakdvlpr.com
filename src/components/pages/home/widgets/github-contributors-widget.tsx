@@ -2,7 +2,7 @@ import HeatMap, { type SVGProps } from "@uiw/react-heat-map";
 import { GitBranch } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import type { Github } from "#/lib/types";
+import type { Github } from "@/lib/types";
 
 interface GithubContributorsWidgetProps {
 	github: Github | null;

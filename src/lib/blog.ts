@@ -2,8 +2,8 @@ import dayjs from "dayjs";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-import { VIEW_EXPIRATION } from "#/lib/constants";
-import { redis } from "#/lib/redis";
+import { VIEW_EXPIRATION } from "@/lib/constants";
+import { redis } from "@/lib/redis";
 
 export interface Post {
 	slug: string;
@@ -18,9 +18,6 @@ export interface Post {
 	views: number;
 }
 
-// Raw .mdx sources, eagerly bundled at build time (server-side). The custom
-// `?raw-md` query (see vite.config.ts) returns the markdown text untouched by
-// the MDX compiler. Keyed by slug.
 const rawGlob = import.meta.glob("../../posts/*.mdx", {
 	query: "?raw-md",
 	import: "default",

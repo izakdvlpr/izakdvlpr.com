@@ -1,11 +1,11 @@
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Button } from "#/components/ui/button";
-import { Input } from "#/components/ui/input";
-import { Spinner } from "#/components/ui/spinner";
-import { Textarea } from "#/components/ui/textarea";
-import { sendEmailFn } from "#/server/contact";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
+import { Textarea } from "@/components/ui/textarea";
+import { sendEmailFn } from "@/lib/server/contact";
 
 export function Form() {
 	const sendEmail = useServerFn(sendEmailFn);

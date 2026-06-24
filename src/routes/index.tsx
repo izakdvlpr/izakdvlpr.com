@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Hero } from "#/components/pages/home/hero";
-import { Widgets } from "#/components/pages/home/widgets";
-import { getStats } from "#/server/stats";
+import { Hero } from "@/components/pages/home/hero";
+import { Widgets } from "@/components/pages/home/widgets";
+import { getStats } from "@/lib/server/stats";
 
 export const Route = createFileRoute("/")({
 	head: () => ({

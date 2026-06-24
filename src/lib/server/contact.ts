@@ -2,12 +2,12 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequestIP } from "@tanstack/react-start/server";
 import { z } from "zod";
 
-import { MAX_SEND_EMAILS, RATE_LIMIT_WINDOW_EXPIRATION } from "#/lib/constants";
-import { sendEmail } from "#/lib/email";
-import { redis } from "#/lib/redis";
+import { MAX_SEND_EMAILS, RATE_LIMIT_WINDOW_EXPIRATION } from "@/lib/constants";
+import { sendEmail } from "@/lib/email";
+import { redis } from "@/lib/redis";
 
 export const sendEmailFn = createServerFn({ method: "POST" })
-	.inputValidator(
+	.validator(
 		z.object({
 			name: z.string(),
 			email: z.string(),

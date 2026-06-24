@@ -8,16 +8,16 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { ThemeProvider } from "next-themes";
-import { Footer } from "#/components/common/footer";
-import { Header } from "#/components/common/header";
-import { Button } from "#/components/ui/button";
-import { Toaster } from "#/components/ui/sonner";
+import { Footer } from "@/components/common/footer";
+import { Header } from "@/components/common/header";
+import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/sonner";
 import {
 	DATAXAMAS_URL,
 	DATAXAMAS_WEBSITE_ID,
 	PUBLIC_URL,
-} from "#/lib/constants";
-import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
+} from "@/lib/constants";
+import TanStackQueryDevtools from "../lib/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
 interface MyRouterContext {
@@ -64,7 +64,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<head>
 				<HeadContent />
 
-				{/* DataXamas analytics */}
 				<script
 					async
 					src={`${DATAXAMAS_URL}/dataxamas.js`}
@@ -72,16 +71,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 					data-allow-localhost="true"
 				/>
 
-				{/* Cloudflare Web Analytics */}
 				<script
 					defer
 					data-cf-beacon='{"token": "1164f2eeb6034fcebd9aac5997ce8ba4"}'
 					src="https://static.cloudflareinsights.com/beacon.min.js"
 				/>
 
-				{/* Google Analytics */}
 				<script
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: analytics bootstrap
 					dangerouslySetInnerHTML={{
 						__html: `
               window.dataLayer = window.dataLayer || [];
@@ -92,9 +88,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 					}}
 				/>
 
-				{/* Microsoft Clarity */}
 				<script
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: analytics bootstrap
 					dangerouslySetInnerHTML={{
 						__html: `
               (function(c,l,a,r,i,t,y){

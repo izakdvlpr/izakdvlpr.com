@@ -11,12 +11,9 @@ import remarkGfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { defineConfig } from "vite";
 
-// @mdx-js/rollup compiles every `.mdx` (it strips the query first), so Vite's
-// `?raw` can't return markdown text. This plugin serves the raw source via a
-// virtual id (`?raw-md`) that the MDX plugin never sees — used by lib/blog.ts
-// for frontmatter + reading-time. Content is inlined at build, fs-read in dev.
 const RAW_SUFFIX = "?raw-md";
 const RAW_PREFIX = "\0raw-md:";
+
 function rawMdxPlugin() {
 	return {
 		name: "raw-mdx",
@@ -39,13 +36,11 @@ function rawMdxPlugin() {
 
 const config = defineConfig({
 	resolve: { tsconfigPaths: true },
-	// @resvg/resvg-js ships a native .node binding — keep it external so Vite's
-	// dep optimizer / bundler never tries to inline it (server-only, used in /api/og).
 	optimizeDeps: { exclude: ["@resvg/resvg-js"] },
 	ssr: { external: ["@resvg/resvg-js"] },
 	plugins: [
 		devtools(),
-		nitro({ rollupConfig: { external: [/^@sentry\//] } }),
+		nitro(),
 		tailwindcss(),
 		rawMdxPlugin(),
 		{

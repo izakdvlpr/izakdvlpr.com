@@ -10,8 +10,8 @@ export const Route = createFileRoute("/sitemap.xml")({
 	server: {
 		handlers: {
 			GET: async () => {
-				const { getSlugs } = await import("#/lib/blog");
-				const { PUBLIC_URL } = await import("#/lib/constants");
+				const { getSlugs } = await import("@/lib/blog");
+				const { PUBLIC_URL } = await import("@/lib/constants");
 
 				const staticRoutes: SitemapEntry[] = [
 					{ url: PUBLIC_URL, changeFrequency: "daily", priority: 1 },

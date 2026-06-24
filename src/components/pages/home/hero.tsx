@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Button } from "#/components/ui/button";
-import { Image } from "#/components/ui/image";
+import { Button } from "@/components/ui/button";
+import { Image } from "@/components/ui/image";
 
 export function Hero() {
 	return (

@@ -5,8 +5,8 @@ export const Route = createFileRoute("/rss.xml")({
 		handlers: {
 			GET: async () => {
 				const { Feed } = await import("feed");
-				const { getAllPosts } = await import("#/lib/blog");
-				const { PUBLIC_URL, USERNAME } = await import("#/lib/constants");
+				const { getAllPosts } = await import("@/lib/blog");
+				const { PUBLIC_URL, USERNAME } = await import("@/lib/constants");
 
 				const posts = await getAllPosts(undefined, false);
 

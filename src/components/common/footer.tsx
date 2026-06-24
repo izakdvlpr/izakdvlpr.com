@@ -1,16 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { Bot, DotIcon, Languages, Rss } from "lucide-react";
-import { Button } from "#/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "#/components/ui/dropdown-menu";
-import { Image } from "#/components/ui/image";
-import { DATAXAMAS_URL, DATAXAMAS_WEBSITE_ID } from "#/lib/constants";
-import { socials } from "#/lib/socials";
+} from "@/components/ui/dropdown-menu";
+import { Image } from "@/components/ui/image";
+import { DATAXAMAS_URL, DATAXAMAS_WEBSITE_ID } from "@/lib/constants";
+import { socials } from "@/lib/data";
 
 export function Footer() {
 	return (

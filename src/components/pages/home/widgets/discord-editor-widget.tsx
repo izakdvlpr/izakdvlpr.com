@@ -1,7 +1,7 @@
 import { Code } from "lucide-react";
 
-import { Image } from "#/components/ui/image";
-import type { Discord } from "#/lib/types";
+import { Image } from "@/components/ui/image";
+import type { Discord } from "@/lib/types";
 
 interface DiscordEditorWidgetProps {
 	discord: Discord | null;

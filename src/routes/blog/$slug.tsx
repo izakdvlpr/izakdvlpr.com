@@ -1,9 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Badge } from "#/components/ui/badge";
-import { Image } from "#/components/ui/image";
-import { MDXRender } from "#/components/ui/mdx/mdx-render";
-import { PUBLIC_URL, USERNAME } from "#/lib/constants";
-import { getPost } from "#/server/blog";
+import { Badge } from "@/components/ui/badge";
+import { Image } from "@/components/ui/image";
+import { MDXRender } from "@/components/ui/mdx/mdx-render";
+import { PUBLIC_URL, USERNAME } from "@/lib/constants";
+import { getPost } from "@/lib/server/blog";
 
 export const Route = createFileRoute("/blog/$slug")({
 	loader: async ({ params }) => {

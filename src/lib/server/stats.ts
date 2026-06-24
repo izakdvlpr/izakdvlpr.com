@@ -4,10 +4,10 @@ import axios from "axios";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { env } from "#/env";
-import { USERNAME } from "#/lib/constants";
-import { redis } from "#/lib/redis";
-import type { Discord, Github, Lastfm, Stats, Wakatime } from "#/lib/types";
+import { env } from "@/lib/env";
+import { USERNAME } from "@/lib/constants";
+import { redis } from "@/lib/redis";
+import type { Discord, Github, Lastfm, Stats, Wakatime } from "@/lib/types";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -177,7 +177,7 @@ async function getLastfm(): Promise<Lastfm> {
 	const lastfmResponse = {
 		nowPlaying: nowPlaying ? lastfmMapTrack(nowPlaying) : null,
 		lastPlayed: lastPlayed ? lastfmMapTrack(lastPlayed) : null,
-		tracks: tracks.map(lastfmMapTrack),
+		tracks: tracks.map(lastfmMapTrack)?.slice(0, 5),
 	};
 
 	await redis.set(
@@ -392,7 +392,7 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
 				: null,
 			coverImageUrl: gameImage?.cover_image_url ?? null,
 		};
-	});
+	})?.slice(0, 5);
 
 	await redis.set(
 		"discord:recent-played",

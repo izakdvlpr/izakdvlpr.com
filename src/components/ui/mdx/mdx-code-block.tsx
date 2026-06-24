@@ -1,7 +1,7 @@
 import type { HTMLAttributes, PropsWithChildren } from "react";
 import { toast } from "sonner";
 
-import { Badge } from "#/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 type MDXCodeBlockProps = PropsWithChildren<HTMLAttributes<HTMLPreElement>>;
 

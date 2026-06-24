@@ -1,7 +1,7 @@
 import { Gamepad2 } from "lucide-react";
 
-import { Image } from "#/components/ui/image";
-import type { Discord } from "#/lib/types";
+import { Image } from "@/components/ui/image";
+import type { Discord } from "@/lib/types";
 
 interface DiscordRecentPlayedWidgetProps {
 	discord: Discord | null;

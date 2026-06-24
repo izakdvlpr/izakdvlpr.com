@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Stats } from "#/lib/types";
-import { getStats } from "#/server/stats";
+import type { Stats } from "@/lib/types";
+import { getStats } from "@/lib/server/stats";
 import { DiscordEditorWidget } from "./discord-editor-widget";
 import { DiscordRecentPlayedWidget } from "./discord-recent-played";
 import { GithubContributorsWidget } from "./github-contributors-widget";

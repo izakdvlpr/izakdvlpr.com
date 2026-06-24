@@ -1,8 +1,8 @@
 import { Music } from "lucide-react";
 import { useState } from "react";
 
-import { Image } from "#/components/ui/image";
-import type { Lastfm } from "#/lib/types";
+import { Image } from "@/components/ui/image";
+import type { Lastfm } from "@/lib/types";
 
 interface LastfmLastTracksPlayedWidgetProps {
 	lastfm: Lastfm | null;

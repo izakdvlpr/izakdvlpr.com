@@ -15,7 +15,7 @@ export const Route = createFileRoute("/robots.txt")({
 	server: {
 		handlers: {
 			GET: async () => {
-				const { PUBLIC_URL } = await import("#/lib/constants");
+				const { PUBLIC_URL } = await import("@/lib/constants");
 
 				const body = [
 					"User-agent: *",

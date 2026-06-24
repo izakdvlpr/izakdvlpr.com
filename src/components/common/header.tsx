@@ -1,14 +1,14 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Code2, Menu } from "lucide-react";
-import { Button } from "#/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "#/components/ui/dropdown-menu";
-import { cn } from "#/lib/utils";
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
 const links = [
 	{ title: "About", href: "/about" },

@@ -1,6 +1,6 @@
 import { Clock } from "lucide-react";
 
-import type { Wakatime } from "#/lib/types";
+import type { Wakatime } from "@/lib/types";
 
 interface WakatimeWidgetProps {
 	wakatime: Wakatime | null;

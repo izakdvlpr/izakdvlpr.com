@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Badge } from "#/components/ui/badge";
-import { Image } from "#/components/ui/image";
-import { getBlogList } from "#/server/blog";
+import { Badge } from "@/components/ui/badge";
+import { Image } from "@/components/ui/image";
+import { getBlogList } from "@/lib/server/blog";
 
 export const Route = createFileRoute("/blog/")({
 	head: () => ({

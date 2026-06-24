@@ -11,11 +11,8 @@ export const env = createEnv({
 		DISCORD_TOKEN: z.string(),
 		LASTFM_API_KEY: z.string(),
 	},
-
 	clientPrefix: "VITE_",
-
 	client: {},
-
 	runtimeEnv: {
 		REDIS_URL: process.env.REDIS_URL,
 		RESEND_API_KEY: process.env.RESEND_API_KEY,
@@ -25,6 +22,5 @@ export const env = createEnv({
 		DISCORD_TOKEN: process.env.DISCORD_TOKEN,
 		LASTFM_API_KEY: process.env.LASTFM_API_KEY,
 	},
-
 	emptyStringAsUndefined: true,
 });

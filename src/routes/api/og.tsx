@@ -19,7 +19,6 @@ export const Route = createFileRoute("/api/og")({
 					),
 				]);
 
-				// satori accepts a React-element-like { type, props } tree directly.
 				const element: any = {
 					type: "div",
 					props: {
