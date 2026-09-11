@@ -35,7 +35,7 @@ export const socials: Social[] = [
 	{
 		name: "Gmail",
 		icon: SiGmail,
-		url: "mailto:izakdvlpr@gmail.com",
+		url: "mailto:isaquelimaoliveira@pm.me",
 	},
 	{
 		name: "Instagram",
@@ -105,7 +105,7 @@ export const projects: Project[] = [
 		tagline: "Your personal media diary.",
 		description:
 			"A media tracking platform where you can log and rate anime, manga, books, TV series, and movies. Create custom lists, write reviews, mark favorites, and discover new content through a powerful search. Everything in one place for the true geek.",
-		status: "in development",
+		status: "live",
 		githubUrl: "https://github.com/TrackGeek",
 		liveUrl: "https://trackgeek.net",
 		tags: ["TypeScript", "TanStack", "NestJS", "PostgreSQL", "Redis"],
@@ -115,19 +115,9 @@ export const projects: Project[] = [
 		tagline: "Analytics without the complexity.",
 		description:
 			"A lightweight analytics tracker that monitors page views, visitor origins, devices, browsers and geographic data in real time — similar to Google Analytics but simpler and privacy-focused.",
-		status: "in development",
+		status: "live",
 		liveUrl: "https://dataxamas.izakdvlpr.com",
 		tags: ["TypeScript", "Next.js", "PostgreSQL", "Redis"],
-	},
-	{
-		name: "Hora Judaica",
-		tagline: "The Jewish calendar in your pocket.",
-		description:
-			"A platform for the Jewish community that provides accurate Shabbat times, upcoming Jewish holidays, and the weekly Parasha reading. Users can subscribe to receive all of this information directly via email, keeping them connected to the Jewish calendar wherever they are.",
-		status: "in development",
-		liveUrl: "https://horajudaica.com",
-		githubUrl: "https://github.com/izakdvlpr/horajudaica",
-		tags: ["TypeScript", "Next.js", "Resend", "Node.js"],
 	},
 ];
 
