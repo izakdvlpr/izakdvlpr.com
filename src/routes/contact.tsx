@@ -12,6 +12,12 @@ export const Route = createFileRoute("/contact")({
 	component: ContactPage,
 });
 
+const resumes = [
+	{ label: "English", href: "/resume-en.pdf", lang: "en" },
+	{ label: "Português", href: "/resume-pt.pdf", lang: "pt-BR" },
+	{ label: "Español", href: "/resume-es.pdf", lang: "es" },
+] as const;
+
 function ContactPage() {
 	return (
 		<main className="mt-10 flex flex-col gap-4">
@@ -45,15 +51,25 @@ function ContactPage() {
 
 				<p className="text-muted-foreground text-sm">
 					Want to know more about my experience and skills? Download my resume
-					below.
+					in your preferred language.
 				</p>
 
-				<Button variant="outline" className="w-fit" asChild>
-					<a href="/curriculo.pdf" target="_blank" rel="noopener noreferrer">
-						<SiAdobeacrobatreader className="size-4" />
-						Download Resume (PDF)
-					</a>
-				</Button>
+				<div className="flex flex-wrap gap-3">
+					{resumes.map((resume) => (
+						<Button key={resume.lang} variant="outline" asChild>
+							<a
+								href={resume.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								hrefLang={resume.lang}
+							>
+								<SiAdobeacrobatreader className="size-4" />
+
+								{resume.label}
+							</a>
+						</Button>
+					))}
+				</div>
 			</section>
 
 			<section className="flex flex-col gap-4">
