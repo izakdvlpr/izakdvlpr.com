@@ -4,8 +4,8 @@ import axios from "axios";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { env } from "@/lib/env";
 import { USERNAME } from "@/lib/constants";
+import { env } from "@/lib/env";
 import { redis } from "@/lib/redis";
 import type { Discord, Github, Lastfm, Stats, Wakatime } from "@/lib/types";
 
@@ -380,19 +380,21 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
 		.then((res) => res.data?.supplemental_game_data ?? null)
 		.catch(() => null);
 
-	const gamesWithImages = games.map((game: any) => {
-		const gameImage = gamesSupplementalData?.find(
-			(g: any) => g.application_id === game.id,
-		);
+	const gamesWithImages = games
+		.map((game: any) => {
+			const gameImage = gamesSupplementalData?.find(
+				(g: any) => g.application_id === game.id,
+			);
 
-		return {
-			...game,
-			iconUrl: gameImage?.icon_hash
-				? `https://cdn.discordapp.com/app-icons/${game.id}/${gameImage.icon_hash}.png`
-				: null,
-			coverImageUrl: gameImage?.cover_image_url ?? null,
-		};
-	})?.slice(0, 5);
+			return {
+				...game,
+				iconUrl: gameImage?.icon_hash
+					? `https://cdn.discordapp.com/app-icons/${game.id}/${gameImage.icon_hash}.png`
+					: null,
+				coverImageUrl: gameImage?.cover_image_url ?? null,
+			};
+		})
+		?.slice(0, 5);
 
 	await redis.set(
 		"discord:recent-played",

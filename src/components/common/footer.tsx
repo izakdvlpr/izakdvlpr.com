@@ -9,8 +9,8 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Image } from "@/components/ui/image";
-import { DATAXAMAS_URL, DATAXAMAS_WEBSITE_ID } from "@/lib/constants";
 import { socials } from "@/lib/data";
+import { env } from "@/lib/env";
 
 export function Footer() {
 	return (
@@ -60,7 +60,7 @@ export function Footer() {
 
 				<iframe
 					title="DataXamas live visitors"
-					src={`${DATAXAMAS_URL}/widgets/${DATAXAMAS_WEBSITE_ID}/live?theme=light`}
+					src={`${env.VITE_DATAXAMAS_URL}/widgets/${env.VITE_DATAXAMAS_WEBSITE_ID}/live?theme=light`}
 					width="160"
 					height="50"
 				/>

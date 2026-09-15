@@ -4,7 +4,7 @@ import { LinkIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { projects, type Project } from '@/lib/data';
+import { type Project, projects } from "@/lib/data";
 
 export const Route = createFileRoute("/projects")({
 	head: () => ({

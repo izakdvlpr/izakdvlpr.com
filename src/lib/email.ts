@@ -1,6 +1,6 @@
 import { Resend } from "resend";
-import { env } from "@/lib/env";
 import { SENDER_EMAIL } from "@/lib/constants";
+import { env } from "@/lib/env";
 
 interface SendEmailData {
 	subject: string;

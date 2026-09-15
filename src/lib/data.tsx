@@ -124,12 +124,12 @@ export const projects: Project[] = [
 export interface SetupItem {
 	name: string;
 	description?: string;
-};
+}
 
 export interface SetupCategory {
 	title: string;
 	items: SetupItem[];
-};
+}
 
 export const setup: SetupCategory[] = [
 	{

@@ -1,5 +1,5 @@
-import { setup } from '@/lib/data';
 import { createFileRoute } from "@tanstack/react-router";
+import { setup } from "@/lib/data";
 
 export const Route = createFileRoute("/setup")({
 	head: () => ({

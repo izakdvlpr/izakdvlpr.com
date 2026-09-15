@@ -12,11 +12,8 @@ import { Footer } from "@/components/common/footer";
 import { Header } from "@/components/common/header";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
-import {
-	DATAXAMAS_URL,
-	DATAXAMAS_WEBSITE_ID,
-	PUBLIC_URL,
-} from "@/lib/constants";
+import { PUBLIC_URL } from "@/lib/constants";
+import { env } from "@/lib/env";
 import TanStackQueryDevtools from "../lib/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
@@ -66,8 +63,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 				<script
 					async
-					src={`${DATAXAMAS_URL}/dataxamas.js`}
-					data-website-id={DATAXAMAS_WEBSITE_ID}
+					src={`${env.VITE_DATAXAMAS_URL}/dataxamas.js`}
+					data-api-key={env.VITE_DATAXAMAS_API_KEY}
 					data-allow-localhost="true"
 				/>
 

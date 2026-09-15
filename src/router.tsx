@@ -15,9 +15,9 @@ export function getRouter() {
 	});
 
 	setupRouterSsrQueryIntegration({
-    router,
-    queryClient: context.queryClient
-  });
+		router,
+		queryClient: context.queryClient,
+	});
 
 	return router;
 }
