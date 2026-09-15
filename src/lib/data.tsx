@@ -218,8 +218,8 @@ export const setup: SetupCategory[] = [
 	{
 		title: "Mobile & Wearables",
 		items: [
-			{ name: "Phone", description: "Redmi 10C Global — 64GB" },
-			{ name: "Smartwatch", description: "Xiaomi Mi Band 8" },
+			{ name: "Phone", description: "Samsung Galaxy S25 FE - 128GB" },
+			{ name: "Smartwatch", description: "Samsung Galaxy Fit 3" },
 		],
 	},
 ];
