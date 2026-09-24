@@ -28,7 +28,7 @@ export function DiscordRecentPlayedWidget({
 									alt={game.gameName}
 									width={40}
 									height={40}
-									className="w-10 h-10 rounded-md shrink-0 grayscale"
+									className="w-10 h-10 rounded-md shrink-0"
 								/>
 							) : (
 								<div className="w-10 h-10 bg-gray-300 rounded flex items-center justify-center">
@@ -37,9 +37,16 @@ export function DiscordRecentPlayedWidget({
 							)}
 
 							<div className="max-w-75 flex flex-col truncate">
-								<p className="text-sm font-medium text-ellipsis overflow-hidden">
+                <a
+									href={game.igdbId ? `https://trackgeek.net/game/${game.igdbId}` : `https://trackgeek.net/search?type=game&query=${encodeURIComponent(game.gameName)}`}
+									title={game.gameName}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-sm font-medium text-ellipsis overflow-hidden hover:underline hover:cursor-pointer"
+								>
 									{game.gameName}
-								</p>
+								</a>
+                
 								<p className="text-xs text-gray-600">{game.playedAt}</p>
 							</div>
 						</li>

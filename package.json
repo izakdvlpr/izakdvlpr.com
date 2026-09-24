@@ -6,7 +6,7 @@
     "dev": "vite dev --port 25241",
     "generate-routes": "tsr generate",
     "build": "vite build",
-    "preview": "vite preview",
+    "start": "vite preview",
     "test": "vitest run",
     "format": "biome format",
     "lint": "biome lint",

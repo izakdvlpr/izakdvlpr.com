@@ -15,6 +15,7 @@ export interface Discord {
 	recentPlayed: {
 		id: string;
 		gameName: string;
+    igdbId: string | null;
 		streakCountDays: number;
 		playedTimeSeconds: number;
 		playedAt: string;

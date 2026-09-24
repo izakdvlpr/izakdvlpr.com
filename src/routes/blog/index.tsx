@@ -47,7 +47,7 @@ function PostListPage() {
 								alt={post.title}
 								width={250}
 								height={150}
-								className="rounded-md grayscale shadow-lg md:flex hidden"
+								className="rounded-md shadow-lg md:flex hidden"
 							/>
 
 							<div className="flex flex-col justify-center gap-4 md:ml-4 ml-0">

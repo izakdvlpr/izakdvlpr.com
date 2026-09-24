@@ -338,8 +338,8 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
 			},
 		)
 		.then(
-			(res) =>
-				res.data?.entries
+			(res) => {
+        return res.data?.entries
 					?.filter((e: any) => e?.extra?.type === "played_game_extra")
 					?.map((game: any) => ({
 						id: game?.extra?.application_id,
@@ -350,7 +350,8 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
 						playedTimeSeconds: game?.traits?.find((t: any) => t?.type === 2)
 							?.duration_seconds,
 						playedAt: dayjs(game?.started_at).fromNow(),
-					})) ?? [],
+					})) ?? []
+      },
 		)
 		.catch(() => null);
 
@@ -360,7 +361,7 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
 
   const applicationIds = games.map((game: any) => game?.id).filter(Boolean) ?? [];
   
-  const gameImages: { applicationId: string; icon: string | null; cover: string | null }[] = [];
+  const gameDetails: { applicationId: string; icon: string | null; cover: string | null; igdbId: string | null }[] = [];
   
   for (const appId of applicationIds) {
     const appicationPublicData = await axios
@@ -376,11 +377,12 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
       .then((res) => res.data?.length > 0 ? res.data[0] : null)
       .catch(() => null);
       
-    if (appicationPublicData) {
-      gameImages.push({
+    if (appicationPublicData) {      
+      gameDetails.push({
         applicationId: appId,
         icon: appicationPublicData?.icon ?? null,
         cover: appicationPublicData?.cover ?? null,
+        igdbId: appicationPublicData?.third_party_skus?.find((sku: any) => sku?.distributor === "igdb")?.id ?? null,
       });
     }
   }
@@ -388,7 +390,7 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
     
 	const gamesWithImages = games
 		?.map((game: any) => {
-			const gameImage = gameImages?.find(
+			const gameImage = gameDetails?.find(
 				(g: any) => g.applicationId === game.id,
 			);
 
@@ -397,6 +399,7 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
 				iconUrl: gameImage?.icon
 					? `https://cdn.discordapp.com/app-icons/${game.id}/${gameImage.icon}.png`
 					: null,
+				igdbId: gameImage?.igdbId ?? null,
 			};
 		})
 		?.slice(0, 5);

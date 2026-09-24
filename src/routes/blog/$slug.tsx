@@ -73,7 +73,7 @@ function PostPage() {
 					alt={post.title}
 					width={1200}
 					height={630}
-					className="rounded-md object-cover grayscale shadow-lg"
+					className="rounded-md object-cover shadow-lg"
 				/>
 			</section>
 

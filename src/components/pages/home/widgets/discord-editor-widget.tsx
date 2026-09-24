@@ -25,7 +25,7 @@ export function DiscordEditorWidget({ discord }: DiscordEditorWidgetProps) {
 							title={discord?.activities?.editor?.largeText ?? ""}
 							width={64}
 							height={64}
-							className="w-16 h-16 rounded-md shrink-0 grayscale"
+							className="w-16 h-16 rounded-md shrink-0"
 						/>
 
 						<Image
@@ -34,7 +34,7 @@ export function DiscordEditorWidget({ discord }: DiscordEditorWidgetProps) {
 							title={discord?.activities?.editor?.smallText}
 							width={64}
 							height={64}
-							className="absolute -bottom-1.25 shrink-0 -right-1.25 w-6 h-6 rounded-full grayscale"
+							className="absolute -bottom-1.25 shrink-0 -right-1.25 w-6 h-6 rounded-full"
 						/>
 					</div>
 				) : (

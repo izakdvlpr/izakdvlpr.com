@@ -25,7 +25,7 @@ function TrackImage({ src, alt }: { src: string; alt: string }) {
 			alt={alt}
 			width={40}
 			height={40}
-			className="w-10 h-10 rounded-md shrink-0 grayscale"
+			className="w-10 h-10 rounded-md shrink-0"
 			onError={() => setError(true)}
 		/>
 	);

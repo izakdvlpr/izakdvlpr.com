@@ -30,7 +30,7 @@ export function LastfmNowPlayingWidget({
 						title={track.album}
 						width={64}
 						height={64}
-						className="w-16 h-16 rounded-md grayscale"
+						className="w-16 h-16 rounded-md"
 					/>
 
 					<div className="max-w-75 flex flex-col truncate">
