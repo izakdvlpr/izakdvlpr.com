@@ -358,40 +358,45 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
 		return [];
 	}
 
-	const gamesSupplementalData = await axios
-		.get("https://discord.com/api/v9/applications/games-supplemental", {
-			params: {
-				application_ids: games.map((game: any) => game?.id).filter(Boolean),
-			},
-			paramsSerializer: (params) => {
-				return Object.entries(params)
-					.flatMap(([key, value]) =>
-						Array.isArray(value)
-							? value.map((v) => `${key}=${encodeURIComponent(v)}`)
-							: `${key}=${encodeURIComponent(value as string)}`,
-					)
-					.join("&");
-			},
-			headers: {
-				Authorization: env.DISCORD_TOKEN,
-				"User-Agent": userAgent,
-			},
-		})
-		.then((res) => res.data?.supplemental_game_data ?? null)
-		.catch(() => null);
-
+  const applicationIds = games.map((game: any) => game?.id).filter(Boolean) ?? [];
+  
+  const gameImages: { applicationId: string; icon: string | null; cover: string | null }[] = [];
+  
+  for (const appId of applicationIds) {
+    const appicationPublicData = await axios
+      .get("https://discord.com/api/v9/applications/public", {
+        params: {
+          application_ids: appId,
+        },
+        headers: {
+          Authorization: env.DISCORD_TOKEN,
+          "User-Agent": userAgent,
+        },
+      })
+      .then((res) => res.data?.length > 0 ? res.data[0] : null)
+      .catch(() => null);
+      
+    if (appicationPublicData) {
+      gameImages.push({
+        applicationId: appId,
+        icon: appicationPublicData?.icon ?? null,
+        cover: appicationPublicData?.cover ?? null,
+      });
+    }
+  }
+	
+    
 	const gamesWithImages = games
-		.map((game: any) => {
-			const gameImage = gamesSupplementalData?.find(
-				(g: any) => g.application_id === game.id,
+		?.map((game: any) => {
+			const gameImage = gameImages?.find(
+				(g: any) => g.applicationId === game.id,
 			);
 
 			return {
 				...game,
-				iconUrl: gameImage?.icon_hash
-					? `https://cdn.discordapp.com/app-icons/${game.id}/${gameImage.icon_hash}.png`
+				iconUrl: gameImage?.icon
+					? `https://cdn.discordapp.com/app-icons/${game.id}/${gameImage.icon}.png`
 					: null,
-				coverImageUrl: gameImage?.cover_image_url ?? null,
 			};
 		})
 		?.slice(0, 5);
