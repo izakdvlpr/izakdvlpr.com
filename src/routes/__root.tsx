@@ -67,36 +67,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 					data-api-key={env.VITE_DATAXAMAS_API_KEY}
 					data-allow-localhost="true"
 				/>
-
-				<script
-					defer
-					data-cf-beacon='{"token": "1164f2eeb6034fcebd9aac5997ce8ba4"}'
-					src="https://static.cloudflareinsights.com/beacon.min.js"
-				/>
-
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-9X4XZM7GBG');
-            `,
-					}}
-				/>
-
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-              (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "ukh6eodw9n");
-            `,
-					}}
-				/>
 			</head>
+
 			<body>
 				<ThemeProvider
 					attribute="class"
@@ -152,7 +124,7 @@ function NotFoundPage() {
 		<section className="w-full h-full flex flex-col items-center justify-center">
 			<h1 className="text-6xl font-bold">404</h1>
 
-			<p className="text-2xl">Not page found.</p>
+			<p className="text-2xl">Page not found.</p>
 
 			<Button className="mt-4" asChild>
 				<Link to="/">Back to home</Link>
