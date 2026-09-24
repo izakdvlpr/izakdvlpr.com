@@ -11,7 +11,7 @@ export function DiscordRecentPlayedWidget({
 	discord,
 }: DiscordRecentPlayedWidgetProps) {
 	return (
-		<div className="md:col-span-2 col-span-1 flex flex-col gap-2 p-5 rounded-md bg-gray-100">
+		<div className="md:col-span-2 col-span-1 flex flex-col gap-2 p-5 rounded-md bg-muted">
 			<div className="flex items-center gap-2">
 				<h1 className="text-md font-medium">Recent Played Games</h1>
 
@@ -31,14 +31,18 @@ export function DiscordRecentPlayedWidget({
 									className="w-10 h-10 rounded-md shrink-0"
 								/>
 							) : (
-								<div className="w-10 h-10 bg-gray-300 rounded flex items-center justify-center">
+								<div className="w-10 h-10 bg-accent-foreground/15 rounded flex items-center justify-center">
 									<Gamepad2 size={16} />
 								</div>
 							)}
 
 							<div className="max-w-75 flex flex-col truncate">
-                <a
-									href={game.igdbId ? `https://trackgeek.net/game/${game.igdbId}` : `https://trackgeek.net/search?type=game&query=${encodeURIComponent(game.gameName)}`}
+								<a
+									href={
+										game.igdbId
+											? `https://trackgeek.net/game/${game.igdbId}`
+											: `https://trackgeek.net/search?type=game&query=${encodeURIComponent(game.gameName)}`
+									}
 									title={game.gameName}
 									target="_blank"
 									rel="noopener noreferrer"
@@ -46,14 +50,14 @@ export function DiscordRecentPlayedWidget({
 								>
 									{game.gameName}
 								</a>
-                
-								<p className="text-xs text-gray-600">{game.playedAt}</p>
+
+								<p className="text-xs text-muted-foreground">{game.playedAt}</p>
 							</div>
 						</li>
 					))}
 				</ul>
 			) : (
-				<p className="mt-4 text-sm text-gray-500">
+				<p className="mt-4 text-sm text-muted-foreground">
 					No recent played games available.
 				</p>
 			)}

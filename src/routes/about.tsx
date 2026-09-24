@@ -30,13 +30,13 @@ function AboutPage() {
 		<main className="mt-10 flex flex-col gap-4">
 			<h1 className="text-3xl font-bold">About</h1>
 
-			<p className="text-lg text-black">
+			<p className="text-lg text-foreground">
 				I'm Isaque Lima, a {getAge()}-year-old systems analyst holding a degree
 				in Systems Analysis and Development from the University of Vila Velha.
 				I'm passionate about technology and programming.
 			</p>
 
-			<p className="text-lg text-black">
+			<p className="text-lg text-foreground">
 				I've been working as a developer since 2018, building experience with
 				TypeScript, React and Node.js. Currently, I work at{" "}
 				<a
@@ -51,7 +51,7 @@ function AboutPage() {
 				API integrations, and scalable solutions.
 			</p>
 
-			<p className="text-lg text-black">
+			<p className="text-lg text-foreground">
 				I'm constantly improving my skills in software architecture, performance
 				optimization, and full-stack development, aiming to create practical and
 				innovative solutions that positively impact people and businesses.

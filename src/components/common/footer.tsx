@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Bot, DotIcon, Languages, Rss } from "lucide-react";
+import { Bot, DotIcon, Languages, Moon, Rss, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -9,10 +11,20 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Image } from "@/components/ui/image";
+import { Switch } from "@/components/ui/switch";
 import { socials } from "@/lib/data";
 import { env } from "@/lib/env";
 
 export function Footer() {
+	const { resolvedTheme, setTheme } = useTheme();
+
+	// resolvedTheme is undefined during SSR; wait for mount to avoid hydration mismatch.
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => setMounted(true), []);
+
+	const theme = mounted && resolvedTheme === "dark" ? "dark" : "light";
+
 	return (
 		<footer className="w-full py-10 flex flex-col items-center justify-between gap-4 md:flex-row md:items-start">
 			<div className="flex items-center gap-2">
@@ -60,13 +72,25 @@ export function Footer() {
 
 				<iframe
 					title="DataXamas live visitors"
-					src={`${env.VITE_DATAXAMAS_URL}/widgets/${env.VITE_DATAXAMAS_WEBSITE_ID}/live?theme=light`}
+					src={`${env.VITE_DATAXAMAS_URL}/widgets/${env.VITE_DATAXAMAS_WEBSITE_ID}/live?theme=${theme}`}
 					width="160"
 					height="50"
 				/>
 			</div>
 
-			<div className="flex justify-end">
+			<div className="flex items-center justify-end gap-4">
+				<div className="flex items-center gap-2">
+					<Sun className="size-4 text-muted-foreground" />
+
+					<Switch
+						checked={theme === "dark"}
+						onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+						aria-label="Toggle theme"
+					/>
+
+					<Moon className="size-4 text-muted-foreground" />
+				</div>
+
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button
@@ -93,7 +117,7 @@ export function Footer() {
 									className="grayscale"
 								/>
 								English
-								<DotIcon className="ml-auto text-black" />
+								<DotIcon className="ml-auto text-foreground" />
 							</DropdownMenuItem>
 
 							<DropdownMenuItem disabled>

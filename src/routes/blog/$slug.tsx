@@ -55,7 +55,7 @@ function PostPage() {
 			<section className="mb-6 flex flex-col gap-4">
 				<h1 className="text-3xl font-extrabold">{post.title}</h1>
 
-				<p className="text-sm text-black">
+				<p className="text-sm text-foreground">
 					{post.date} • {post.words} words • {post.readingTime} • {post.views}{" "}
 					views
 				</p>

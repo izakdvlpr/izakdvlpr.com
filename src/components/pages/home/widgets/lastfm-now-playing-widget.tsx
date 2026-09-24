@@ -13,7 +13,7 @@ export function LastfmNowPlayingWidget({
 	const track = lastfm?.nowPlaying ?? lastfm?.lastPlayed;
 
 	return (
-		<div className="md:col-span-2 col-span-1 h-37.5 p-5 flex flex-col gap-2 rounded-md bg-gray-100">
+		<div className="md:col-span-2 col-span-1 h-37.5 p-5 flex flex-col gap-2 rounded-md bg-muted">
 			<div className="flex items-center gap-2">
 				<h1 className="text-md font-medium">
 					{lastfm.nowPlaying ? "Listening to music" : "Last listened track"}
@@ -61,7 +61,7 @@ export function LastfmNowPlayingWidget({
 					</div>
 				</div>
 			) : (
-				<p className="text-sm text-gray-500">No recent track found</p>
+				<p className="text-sm text-muted-foreground">No recent track found</p>
 			)}
 		</div>
 	);

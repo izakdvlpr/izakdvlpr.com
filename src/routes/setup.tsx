@@ -13,7 +13,7 @@ function SetupPage() {
 		<main className="mt-10 flex flex-col gap-4">
 			<h1 className="text-3xl font-bold">Setup</h1>
 
-			<p className="text-lg text-black dark:text-white/70">
+			<p className="text-lg text-foreground">
 				Hardware and peripherals I use on a daily basis.
 			</p>
 
@@ -29,11 +29,11 @@ function SetupPage() {
 									key={`${item.name}-${index}`}
 									className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 py-2 border-b border-dashed last:border-0"
 								>
-									<span className="font-medium text-sm text-black/60 dark:text-white/50 uppercase tracking-wide min-w-35">
+									<span className="font-medium text-sm text-muted-foreground uppercase tracking-wide min-w-35">
 										{item.name}
 									</span>
 									{item.description && (
-										<span className="text-base text-black dark:text-white/90 sm:text-right">
+										<span className="text-base text-foreground sm:text-right">
 											{item.description}
 										</span>
 									)}

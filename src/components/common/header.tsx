@@ -30,7 +30,7 @@ export function Header() {
 					variant="outline"
 					className="[&_svg]:size-5"
 				>
-					<Code2 className="text-black" />
+					<Code2 className="text-foreground" />
 				</Button>
 
 				<h1 className="text-2xl font-bold">izakdvlpr</h1>
@@ -42,8 +42,8 @@ export function Header() {
 						key={link.href}
 						to={link.href}
 						className={cn(
-							"text-black",
-							pathname.startsWith(link.href) && "font-bold text-black",
+							"text-foreground",
+							pathname.startsWith(link.href) && "font-bold text-foreground",
 						)}
 					>
 						{link.title}

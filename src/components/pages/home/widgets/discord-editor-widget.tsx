@@ -9,7 +9,7 @@ interface DiscordEditorWidgetProps {
 
 export function DiscordEditorWidget({ discord }: DiscordEditorWidgetProps) {
 	return (
-		<div className="md:col-span-2 col-span-1 h-37.5 p-5 flex flex-col gap-2 rounded-md bg-gray-100">
+		<div className="md:col-span-2 col-span-1 h-37.5 p-5 flex flex-col gap-2 rounded-md bg-muted">
 			<div className="flex items-center gap-2">
 				<h1 className="text-md font-medium">Programming</h1>
 
@@ -38,8 +38,8 @@ export function DiscordEditorWidget({ discord }: DiscordEditorWidgetProps) {
 						/>
 					</div>
 				) : (
-					<div className="w-16 h-16 rounded-md bg-gray-300 flex items-center justify-center">
-						<Code size={28} className="text-gray-500" />
+					<div className="w-16 h-16 rounded-md bg-accent-foreground/15 flex items-center justify-center">
+						<Code size={28} className="text-muted-foreground" />
 					</div>
 				)}
 

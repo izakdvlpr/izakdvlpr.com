@@ -1,8 +1,20 @@
 import HeatMap, { type SVGProps } from "@uiw/react-heat-map";
 import { GitBranch } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 
 import type { Github } from "@/lib/types";
+
+const panelColors = {
+	light: {
+		empty: "#ebedf0",
+		levels: { "1": "#fff", "2": "#a0a0a0", "3": "#696969", "4": "#2a2a2a" },
+	},
+	dark: {
+		empty: "#3f3f46",
+		levels: { "1": "#52525b", "2": "#71717a", "3": "#a1a1aa", "4": "#f4f4f5" },
+	},
+};
 
 interface GithubContributorsWidgetProps {
 	github: Github | null;
@@ -58,6 +70,15 @@ export function GithubContributorsWidget({
 	const [hoveredTile, setHoveredTile] = useState<string | null>(defaultValue);
 	const scrollRef = useRef<HTMLDivElement>(null);
 
+	const { resolvedTheme } = useTheme();
+
+	// resolvedTheme is undefined during SSR; wait for mount to avoid hydration mismatch.
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => setMounted(true), []);
+
+	const theme = mounted && resolvedTheme === "dark" ? "dark" : "light";
+
 	useEffect(() => {
 		if (scrollRef.current) {
 			scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
@@ -65,14 +86,16 @@ export function GithubContributorsWidget({
 	}, [github]);
 
 	return (
-		<div className="md:col-span-3 col-span-1 h-50 p-5 rounded-md bg-gray-100">
+		<div className="md:col-span-3 col-span-1 h-50 p-5 rounded-md bg-muted">
 			<div className="flex items-center gap-2 justify-between mb-2">
 				<div className="flex items-center gap-2">
 					<h1 className="text-md font-medium">Github Contributions</h1>
 					<GitBranch size={18} />
 				</div>
 
-				{github && <span className="text-sm text-gray-600">{hoveredTile}</span>}
+				{github && (
+					<span className="text-sm text-muted-foreground">{hoveredTile}</span>
+				)}
 			</div>
 
 			{github ? (
@@ -88,25 +111,27 @@ export function GithubContributorsWidget({
 						weekLabels={false}
 						monthLabels={false}
 						legendCellSize={0}
-						style={{ color: "#fff" }}
+						style={
+							{
+								color: "#fff",
+								"--rhm-rect": panelColors[theme].empty,
+							} as CSSProperties
+						}
 						rectProps={{ rx: 4 }}
 						rectRender={renderRect((date) => setHoveredTile(date))}
 						height={100}
 						width={700}
-						panelColors={{
-							"1": "#fff",
-							"2": "#a0a0a0",
-							"3": "#696969",
-							"4": "#2a2a2a",
-						}}
+						panelColors={panelColors[theme].levels}
 					/>
 				</div>
 			) : (
-				<p className="text-sm text-gray-500">No contribution data available.</p>
+				<p className="text-sm text-muted-foreground">
+					No contribution data available.
+				</p>
 			)}
 
 			{github?.lastPushedAt && (
-				<p className="mt-2 text-sm text-gray-600">
+				<p className="mt-2 text-sm text-muted-foreground">
 					Last pushed on{" "}
 					{new Date(github.lastPushedAt).toLocaleDateString("en-US", {
 						month: "long",

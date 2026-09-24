@@ -89,7 +89,7 @@ function ProjectsPage() {
 						</article>
 
 						{index !== projects.length - 1 && (
-							<hr className="mt-8 border-gray-100" />
+							<hr className="mt-8 border-border" />
 						)}
 					</div>
 				))}

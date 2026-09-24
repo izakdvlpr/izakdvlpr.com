@@ -23,9 +23,9 @@ export function MDXCodeBlock(props: MDXCodeBlockProps) {
 	}
 
 	return (
-		<div className="p-4 flex flex-col overflow-x-auto rounded-md border-2 border-black bg-gray-100">
+		<div className="p-4 flex flex-col overflow-x-auto rounded-md border-2 border-foreground bg-muted">
 			<div className="mb-4 flex items-center justify-between">
-				<span className="text-xs font-semibold text-black uppercase">
+				<span className="text-xs font-semibold text-foreground uppercase">
 					{language ?? "Unknown"}
 				</span>
 

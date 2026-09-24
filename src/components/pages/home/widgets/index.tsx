@@ -26,10 +26,10 @@ export function Widgets({ initialData }: WidgetsProps) {
 		<div className="grid gap-4 md:grid-cols-4 grid-cols-1">
 			{statsResponse.isLoading && (
 				<>
-					<div className="col-span-2 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
-					<div className="col-span-2 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
-					<div className="col-span-3 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
-					<div className="col-span-1 h-37.5 p-5 rounded-md bg-gray-100 animate-pulse"></div>
+					<div className="col-span-2 h-37.5 p-5 rounded-md bg-muted animate-pulse"></div>
+					<div className="col-span-2 h-37.5 p-5 rounded-md bg-muted animate-pulse"></div>
+					<div className="col-span-3 h-37.5 p-5 rounded-md bg-muted animate-pulse"></div>
+					<div className="col-span-1 h-37.5 p-5 rounded-md bg-muted animate-pulse"></div>
 				</>
 			)}
 

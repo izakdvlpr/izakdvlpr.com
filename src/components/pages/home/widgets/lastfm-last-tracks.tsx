@@ -13,7 +13,7 @@ function TrackImage({ src, alt }: { src: string; alt: string }) {
 
 	if (error) {
 		return (
-			<div className="w-10 h-10 bg-gray-300 rounded flex items-center justify-center shrink-0">
+			<div className="w-10 h-10 bg-accent-foreground/15 rounded flex items-center justify-center shrink-0">
 				<Music size={16} />
 			</div>
 		);
@@ -35,7 +35,7 @@ export function LastfmLastTracksPlayedWidget({
 	lastfm,
 }: LastfmLastTracksPlayedWidgetProps) {
 	return (
-		<div className="md:col-span-2 col-span-1 p-5 flex flex-col gap-2 rounded-md bg-gray-100">
+		<div className="md:col-span-2 col-span-1 p-5 flex flex-col gap-2 rounded-md bg-muted">
 			<div className="flex items-center gap-2">
 				<h1 className="text-md font-medium">Last Tracks</h1>
 
@@ -49,7 +49,7 @@ export function LastfmLastTracksPlayedWidget({
 							{track.imageUrl ? (
 								<TrackImage src={track.imageUrl} alt={track.name} />
 							) : (
-								<div className="w-10 h-10 bg-gray-300 rounded flex items-center justify-center shrink-0">
+								<div className="w-10 h-10 bg-accent-foreground/15 rounded flex items-center justify-center shrink-0">
 									<Music size={16} />
 								</div>
 							)}
@@ -64,13 +64,13 @@ export function LastfmLastTracksPlayedWidget({
 									{track.name}
 								</a>
 
-								<p className="text-xs text-gray-600">{track.artist}</p>
+								<p className="text-xs text-muted-foreground">{track.artist}</p>
 							</div>
 						</li>
 					))}
 				</ul>
 			) : (
-				<p className="mt-4 text-sm text-gray-500">
+				<p className="mt-4 text-sm text-muted-foreground">
 					No recent tracks available.
 				</p>
 			)}

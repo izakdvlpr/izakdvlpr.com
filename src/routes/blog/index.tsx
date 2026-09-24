@@ -53,9 +53,11 @@ function PostListPage() {
 							<div className="flex flex-col justify-center gap-4 md:ml-4 ml-0">
 								<h2 className="text-3xl font-bold">{post.title}</h2>
 
-								<p className="text-lg text-gray-600">{post.description}</p>
+								<p className="text-lg text-muted-foreground">
+									{post.description}
+								</p>
 
-								<p className="text-sm text-black">
+								<p className="text-sm text-foreground">
 									{post.date} • {post.words} words • {post.readingTime} •{" "}
 									{post.views} views
 								</p>
@@ -71,7 +73,7 @@ function PostListPage() {
 						</div>
 
 						{index !== posts.length - 1 && (
-							<hr className="my-4 border-gray-100" />
+							<hr className="my-4 border-border" />
 						)}
 					</article>
 				</Link>
