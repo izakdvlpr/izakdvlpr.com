@@ -10,6 +10,7 @@ export const env = createEnv({
 		DISCORD_ID: z.string(),
 		DISCORD_TOKEN: z.string(),
 		LASTFM_API_KEY: z.string(),
+		RUN_SYNC_TOKEN: z.string().min(32),
 	},
 	clientPrefix: "VITE_",
 	client: {
@@ -28,6 +29,7 @@ export const env = createEnv({
 		DISCORD_ID: process.env.DISCORD_ID,
 		DISCORD_TOKEN: process.env.DISCORD_TOKEN,
 		LASTFM_API_KEY: process.env.LASTFM_API_KEY,
+		RUN_SYNC_TOKEN: process.env.RUN_SYNC_TOKEN,
 	},
 	emptyStringAsUndefined: true,
 });

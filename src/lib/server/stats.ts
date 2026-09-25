@@ -7,7 +7,14 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { USERNAME } from "@/lib/constants";
 import { env } from "@/lib/env";
 import { redis } from "@/lib/redis";
-import type { Discord, Github, Lastfm, Stats, Wakatime } from "@/lib/types";
+import type {
+	Discord,
+	Github,
+	Lastfm,
+	SamsungHealth,
+	Stats,
+	Wakatime,
+} from "@/lib/types";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -24,6 +31,13 @@ const emptyStats: Stats = {
 		topLanguage: null,
 	},
 	discord: { activities: { editor: null }, recentPlayed: [] },
+  samsungHealth: {
+    fetchedAt: null,
+    todaySteps: null,
+    averagePace: null,
+    totalKm: null,
+    totalSteps: null,
+  }
 };
 
 export const getStats = createServerFn({ method: "GET" }).handler(
@@ -34,6 +48,7 @@ export const getStats = createServerFn({ method: "GET" }).handler(
 			const wakatime = await getWakatime();
 			const discordActivities = await getDiscordActivities();
 			const discordRecentPlayed = await getDiscordRecentPlayed();
+      const samsungHealth = await getSamsungHealth();
 
 			return {
 				github,
@@ -43,6 +58,7 @@ export const getStats = createServerFn({ method: "GET" }).handler(
 					activities: discordActivities,
 					recentPlayed: discordRecentPlayed,
 				},
+        samsungHealth
 			};
 		} catch (error) {
 			console.error("Error fetching stats:", error);
@@ -412,4 +428,14 @@ async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
 	);
 
 	return gamesWithImages;
+}
+
+async function getSamsungHealth(): Promise<SamsungHealth> {
+  const cachedData = await redis.get("samsung-health");
+
+  if (cachedData) {
+    return JSON.parse(cachedData) as SamsungHealth;
+  }
+
+  return emptyStats.samsungHealth;
 }

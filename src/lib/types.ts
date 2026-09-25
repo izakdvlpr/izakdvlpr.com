@@ -56,9 +56,18 @@ export interface Github {
 	}[];
 }
 
+export interface SamsungHealth {
+  fetchedAt: string | null;
+  todaySteps: number | null;
+  averagePace: number | null;
+  totalKm: number | null;
+  totalSteps: number | null;
+}
+
 export interface Stats {
 	discord: Discord;
 	lastfm: Lastfm;
 	wakatime: Wakatime;
 	github: Github;
+  samsungHealth: SamsungHealth;
 }

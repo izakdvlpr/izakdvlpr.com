@@ -19,6 +19,7 @@ import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ApiOgRouteImport } from './routes/api/og'
+import { Route as ApiRunSyncRouteImport } from './routes/api/run-sync'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
@@ -72,6 +73,11 @@ const ApiOgRoute = ApiOgRouteImport.update({
   path: '/api/og',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiRunSyncRoute = ApiRunSyncRouteImport.update({
+  id: '/api/run-sync',
+  path: '/api/run-sync',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/setup': typeof SetupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/og': typeof ApiOgRoute
+  '/api/run-sync': typeof ApiRunSyncRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/setup': typeof SetupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/og': typeof ApiOgRoute
+  '/api/run-sync': typeof ApiRunSyncRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/setup': typeof SetupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/og': typeof ApiOgRoute
+  '/api/run-sync': typeof ApiRunSyncRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/setup'
     | '/sitemap.xml'
     | '/api/og'
+    | '/api/run-sync'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/setup'
     | '/sitemap.xml'
     | '/api/og'
+    | '/api/run-sync'
     | '/blog/$slug'
     | '/blog'
   id:
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/setup'
     | '/sitemap.xml'
     | '/api/og'
+    | '/api/run-sync'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -182,6 +194,7 @@ export interface RootRouteChildren {
   SetupRoute: typeof SetupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiOgRoute: typeof ApiOgRoute
+  ApiRunSyncRoute: typeof ApiRunSyncRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -258,6 +271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiOgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/run-sync': {
+      id: '/api/run-sync'
+      path: '/api/run-sync'
+      fullPath: '/api/run-sync'
+      preLoaderRoute: typeof ApiRunSyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -286,6 +306,7 @@ const rootRouteChildren: RootRouteChildren = {
   SetupRoute: SetupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiOgRoute: ApiOgRoute,
+  ApiRunSyncRoute: ApiRunSyncRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
