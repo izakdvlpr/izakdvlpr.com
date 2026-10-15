@@ -4,6 +4,14 @@ import axios from "axios";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import {
+	type AuthorizationPayload,
+	type AuthTokensResponse,
+	exchangeAccessCodeForAuthTokens,
+	exchangeNpssoForAccessCode,
+	exchangeRefreshTokenForAuthTokens,
+	getUserTrophyProfileSummary,
+} from "psn-api";
 import { USERNAME } from "@/lib/constants";
 import { env } from "@/lib/env";
 import { redis } from "@/lib/redis";
@@ -11,6 +19,7 @@ import type {
 	Discord,
 	Github,
 	Lastfm,
+	Psn,
 	SamsungHealth,
 	Stats,
 	Wakatime,
@@ -37,7 +46,13 @@ const emptyStats: Stats = {
     averagePace: null,
     totalKm: null,
     totalSteps: null,
-  }
+  },
+	psn: {
+		trophyLevel: null,
+		progress: null,
+		tier: null,
+		earnedTrophies: null,
+	},
 };
 
 export const getStats = createServerFn({ method: "GET" }).handler(
@@ -49,6 +64,7 @@ export const getStats = createServerFn({ method: "GET" }).handler(
 			const discordActivities = await getDiscordActivities();
 			const discordRecentPlayed = await getDiscordRecentPlayed();
       const samsungHealth = await getSamsungHealth();
+			const psn = await getPsn();
 
 			return {
 				github,
@@ -58,7 +74,8 @@ export const getStats = createServerFn({ method: "GET" }).handler(
 					activities: discordActivities,
 					recentPlayed: discordRecentPlayed,
 				},
-        samsungHealth
+        samsungHealth,
+				psn,
 			};
 		} catch (error) {
 			console.error("Error fetching stats:", error);
@@ -438,4 +455,84 @@ async function getSamsungHealth(): Promise<SamsungHealth> {
   }
 
   return emptyStats.samsungHealth;
+}
+
+// PSN
+
+async function getPsnAuthorization(): Promise<AuthorizationPayload> {
+	const cachedAccessToken = await redis.get("psn:access-token");
+
+	if (cachedAccessToken) {
+		return { accessToken: cachedAccessToken };
+	}
+
+	const cachedRefreshToken = await redis.get("psn:refresh-token");
+
+	let tokens: AuthTokensResponse;
+
+	if (cachedRefreshToken) {
+		tokens = await exchangeRefreshTokenForAuthTokens(cachedRefreshToken);
+	} else {
+		const accessCode = await exchangeNpssoForAccessCode(env.PSN_NPSSO);
+
+		tokens = await exchangeAccessCodeForAuthTokens(accessCode);
+	}
+
+	// Margem de 60s pra não usar token que expira no meio da request
+	await redis.set(
+		"psn:access-token",
+		tokens.accessToken,
+		"EX",
+		Math.max(tokens.expiresIn - 60, 1),
+	);
+
+	await redis.set(
+		"psn:refresh-token",
+		tokens.refreshToken,
+		"EX",
+		Math.max(tokens.refreshTokenExpiresIn - 60, 1),
+	);
+
+	return { accessToken: tokens.accessToken };
+}
+
+async function getPsn(): Promise<Psn> {
+	const cachedTrophies = await redis.get("psn:trophies");
+
+	if (cachedTrophies) {
+		return JSON.parse(cachedTrophies) as Psn;
+	}
+
+	const summary = await getPsnAuthorization()
+		.then((authorization) => getUserTrophyProfileSummary(authorization, "me"))
+		.catch((error) => {
+			console.error("Error fetching PSN trophies:", error);
+
+			return null;
+		});
+
+	if (!summary) {
+		return emptyStats.psn;
+	}
+
+	const trophiesResponse: Psn = {
+		trophyLevel: Number(summary.trophyLevel),
+		progress: summary.progress,
+		tier: summary.tier,
+		earnedTrophies: {
+			platinum: summary.earnedTrophies.platinum,
+			gold: summary.earnedTrophies.gold,
+			silver: summary.earnedTrophies.silver,
+			bronze: summary.earnedTrophies.bronze,
+		},
+	};
+
+	await redis.set(
+		"psn:trophies",
+		JSON.stringify(trophiesResponse),
+		"EX",
+		60 * 60 * 6, // 6 hour
+	);
+
+	return trophiesResponse;
 }

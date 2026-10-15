@@ -6,6 +6,7 @@ import { DiscordRecentPlayedWidget } from "./discord-recent-played";
 import { GithubContributorsWidget } from "./github-contributors-widget";
 import { LastfmLastTracksPlayedWidget } from "./lastfm-last-tracks";
 import { LastfmNowPlayingWidget } from "./lastfm-now-playing-widget";
+import { PsnTrophiesWidget } from "./psn-trophies-widget";
 import { SamsungHealthWidget } from "./samsung-health-widget";
 import { WakatimeWidget } from "./wakatime-widget";
 
@@ -41,6 +42,7 @@ export function Widgets({ initialData }: WidgetsProps) {
 					<GithubContributorsWidget github={statsResponse.data.github} />
 					<WakatimeWidget wakatime={statsResponse.data.wakatime} />
 					<SamsungHealthWidget samsungHealth={statsResponse.data.samsungHealth} />
+					<PsnTrophiesWidget psn={statsResponse.data.psn} />
 					<DiscordRecentPlayedWidget discord={statsResponse.data.discord} />
 					<LastfmLastTracksPlayedWidget lastfm={statsResponse.data.lastfm} />
 				</>

@@ -64,10 +64,23 @@ export interface SamsungHealth {
   totalSteps: number | null;
 }
 
+export interface Psn {
+	trophyLevel: number | null;
+	progress: number | null;
+	tier: number | null;
+	earnedTrophies: {
+		platinum: number;
+		gold: number;
+		silver: number;
+		bronze: number;
+	} | null;
+}
+
 export interface Stats {
 	discord: Discord;
 	lastfm: Lastfm;
 	wakatime: Wakatime;
 	github: Github;
   samsungHealth: SamsungHealth;
+	psn: Psn;
 }

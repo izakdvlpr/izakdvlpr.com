@@ -11,6 +11,7 @@ export const env = createEnv({
 		DISCORD_TOKEN: z.string(),
 		LASTFM_API_KEY: z.string(),
 		RUN_SYNC_TOKEN: z.string().min(32),
+		PSN_NPSSO: z.string().length(64),
 	},
 	clientPrefix: "VITE_",
 	client: {
@@ -30,6 +31,7 @@ export const env = createEnv({
 		DISCORD_TOKEN: process.env.DISCORD_TOKEN,
 		LASTFM_API_KEY: process.env.LASTFM_API_KEY,
 		RUN_SYNC_TOKEN: process.env.RUN_SYNC_TOKEN,
+		PSN_NPSSO: process.env.PSN_NPSSO,
 	},
 	emptyStringAsUndefined: true,
 });
