@@ -14,6 +14,7 @@ import { Image } from "@/components/ui/image";
 import { Switch } from "@/components/ui/switch";
 import { socials } from "@/lib/data";
 import { env } from "@/lib/env";
+import { resolveTheme } from "@/lib/theme";
 
 export function Footer() {
 	const { resolvedTheme, setTheme } = useTheme();
@@ -22,6 +23,20 @@ export function Footer() {
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => setMounted(true), []);
+
+	// Follow day/night changes while the tab stays open and drop expired overrides.
+	useEffect(() => {
+		const sync = () => setTheme(resolveTheme());
+
+		const interval = setInterval(sync, 60_000);
+
+		document.addEventListener("visibilitychange", sync);
+
+		return () => {
+			clearInterval(interval);
+			document.removeEventListener("visibilitychange", sync);
+		};
+	}, [setTheme]);
 
 	const theme = mounted && resolvedTheme === "dark" ? "dark" : "light";
 
@@ -84,7 +99,9 @@ export function Footer() {
 
 					<Switch
 						checked={theme === "dark"}
-						onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+						onCheckedChange={(checked) =>
+							setTheme(resolveTheme(checked ? "dark" : "light"))
+						}
 						aria-label="Toggle theme"
 					/>
 

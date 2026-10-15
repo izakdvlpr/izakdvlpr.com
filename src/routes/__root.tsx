@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 import { PUBLIC_URL } from "@/lib/constants";
 import { env } from "@/lib/env";
+import { themeScript } from "@/lib/theme";
 import TanStackQueryDevtools from "../lib/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
@@ -59,6 +60,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: static script that sets the time-based theme before first paint.
+					dangerouslySetInnerHTML={{ __html: themeScript }}
+				/>
+
 				<HeadContent />
 
 				<script
@@ -73,6 +79,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="light"
+					enableSystem={false}
 					disableTransitionOnChange
 				>
 					<div className="w-full max-w-225 h-screen mx-auto p-6 flex flex-col relative">
