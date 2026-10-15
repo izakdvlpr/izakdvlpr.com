@@ -42,9 +42,9 @@ export function SamsungHealthWidget({
 		].some((value) => value !== null);
 
 	return (
-		<div className="md:col-span-4 col-span-1 p-5 flex flex-col gap-2 rounded-md bg-muted">
+		<div className="md:col-span-2 col-span-1 p-5 flex flex-col gap-2 rounded-md bg-muted">
 			<div className="flex items-center gap-2">
-				<h1 className="text-md font-medium">Activity</h1>
+				<h1 className="text-md font-medium">Samsung Health</h1>
 
 				<Footprints size={18} />
 			</div>

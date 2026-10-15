@@ -30,9 +30,9 @@ export function PsnTrophiesWidget({ psn }: PsnTrophiesWidgetProps) {
 	];
 
 	return (
-		<div className="md:col-span-4 col-span-1 p-5 flex flex-col gap-2 rounded-md bg-muted">
+		<div className="md:col-span-2 col-span-1 p-5 flex flex-col gap-2 rounded-md bg-muted">
 			<div className="flex items-center gap-2">
-				<h1 className="text-md font-medium">Trophies</h1>
+				<h1 className="text-md font-medium">PlayStation Trophies</h1>
 
 				<Trophy size={18} />
 			</div>

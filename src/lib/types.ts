@@ -1,16 +1,25 @@
+export type DiscordActivityType =
+	| "playing"
+	| "streaming"
+	| "listening"
+	| "watching"
+	| "competing";
+
 export interface DiscordActivity {
-	largeImage: string;
-	largeText: string;
-	smallImage: string;
-	smallText: string;
-	details: string;
-	state: string;
-	time: string;
+	name: string;
+	type: DiscordActivityType;
+	largeImage: string | null;
+	largeText: string | null;
+	smallImage: string | null;
+	smallText: string | null;
+	details: string | null;
+	state: string | null;
+	time: string | null;
 }
 
 export interface Discord {
 	activities: {
-		editor: DiscordActivity | null;
+		latest: DiscordActivity | null;
 	};
 	recentPlayed: {
 		id: string;

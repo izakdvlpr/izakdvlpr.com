@@ -10,7 +10,7 @@ export function WakatimeWidget({ wakatime }: WakatimeWidgetProps) {
 	return (
 		<div className="col-span-1 h-50 p-5 flex flex-col gap-2 rounded-md bg-muted">
 			<div className="flex items-center gap-2">
-				<h1 className="text-md font-medium">Coding Time</h1>
+				<h1 className="text-md font-medium">Wakatime</h1>
 
 				<Clock size={18} />
 			</div>

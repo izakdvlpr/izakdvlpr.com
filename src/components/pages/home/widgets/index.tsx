@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getStats } from "@/lib/server/stats";
 import type { Stats } from "@/lib/types";
-import { DiscordEditorWidget } from "./discord-editor-widget";
+import { DiscordActivityWidget } from "./discord-activity-widget";
 import { DiscordRecentPlayedWidget } from "./discord-recent-played";
 import { GithubContributorsWidget } from "./github-contributors-widget";
 import { LastfmLastTracksPlayedWidget } from "./lastfm-last-tracks";
@@ -37,12 +37,12 @@ export function Widgets({ initialData }: WidgetsProps) {
 
 			{statsResponse.data && (
 				<>
-					<DiscordEditorWidget discord={statsResponse.data.discord} />
+					<DiscordActivityWidget discord={statsResponse.data.discord} />
 					<LastfmNowPlayingWidget lastfm={statsResponse.data.lastfm} />
 					<GithubContributorsWidget github={statsResponse.data.github} />
 					<WakatimeWidget wakatime={statsResponse.data.wakatime} />
-					<SamsungHealthWidget samsungHealth={statsResponse.data.samsungHealth} />
 					<PsnTrophiesWidget psn={statsResponse.data.psn} />
+					<SamsungHealthWidget samsungHealth={statsResponse.data.samsungHealth} />
 					<DiscordRecentPlayedWidget discord={statsResponse.data.discord} />
 					<LastfmLastTracksPlayedWidget lastfm={statsResponse.data.lastfm} />
 				</>

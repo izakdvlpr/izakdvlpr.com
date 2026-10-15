@@ -17,6 +17,8 @@ import { env } from "@/lib/env";
 import { redis } from "@/lib/redis";
 import type {
 	Discord,
+	DiscordActivity,
+	DiscordActivityType,
 	Github,
 	Lastfm,
 	Psn,
@@ -39,7 +41,7 @@ const emptyStats: Stats = {
 		avgDaily: "0h 0m",
 		topLanguage: null,
 	},
-	discord: { activities: { editor: null }, recentPlayed: [] },
+	discord: { activities: { latest: null }, recentPlayed: [] },
   samsungHealth: {
     fetchedAt: null,
     todaySteps: null,
@@ -312,28 +314,22 @@ async function getDiscordActivities(): Promise<Discord["activities"]> {
 		.then((res) => res.data.data)
 		.catch(() => null);
 
-	const activities =
-		userData?.activities
-			?.filter((a: any) =>
-				["Android Studio", "Visual Studio Code", "Code"].includes(a.name),
-			)
-			?.map((activity: any) => ({
-				largeImage: getDiscordImageUrl(activity.assets?.large_image) ?? null,
-				largeText: activity.assets?.large_text ?? null,
-				smallImage: getDiscordImageUrl(activity.assets?.small_image) ?? null,
-				smallText: activity.assets?.small_text ?? null,
-				details: activity?.details ?? null,
-				state: activity?.state ?? null,
-				time:
-					dayjs
-						.duration(Date.now() - activity.timestamps.start)
-						.format("HH:mm:ss") ?? null,
-			})) ?? [];
+	const activities: LanyardActivity[] = userData?.activities ?? [];
 
-	const editor = activities?.[0] ?? null;
+	// Custom status (type 4) não é atividade de fato, só o texto do perfil.
+	// Spotify já aparece no widget do Last.fm
+	const latestActivity =
+		activities
+			.filter((activity) => activity.type in discordActivityTypes)
+			.filter((activity) => activity.name !== "Spotify")
+			.sort(
+				(a, b) =>
+					(b.timestamps?.start ?? b.created_at ?? 0) -
+					(a.timestamps?.start ?? a.created_at ?? 0),
+			)[0] ?? null;
 
-	const activitiesResponse = {
-		editor,
+	const activitiesResponse: Discord["activities"] = {
+		latest: latestActivity ? discordMapActivity(latestActivity) : null,
 	};
 
 	await redis.set(
@@ -346,8 +342,73 @@ async function getDiscordActivities(): Promise<Discord["activities"]> {
 	return activitiesResponse;
 }
 
-function getDiscordImageUrl(url: string) {
-	return url?.match(/https\/.*$/)?.[0].replace("https/", "https://") as string;
+interface LanyardActivity {
+	type: number;
+	name: string;
+	application_id?: string;
+	details?: string | null;
+	state?: string | null;
+	created_at?: number;
+	timestamps?: { start?: number; end?: number };
+	assets?: {
+		large_image?: string;
+		large_text?: string;
+		small_image?: string;
+		small_text?: string;
+	};
+}
+
+const discordActivityTypes: Record<number, DiscordActivityType> = {
+	0: "playing",
+	1: "streaming",
+	2: "listening",
+	3: "watching",
+	5: "competing",
+};
+
+function discordMapActivity(activity: LanyardActivity): DiscordActivity {
+	const startedAt = activity.timestamps?.start ?? activity.created_at;
+
+	return {
+		name: activity.name,
+		type: discordActivityTypes[activity.type],
+		largeImage: getDiscordAssetUrl(
+			activity.assets?.large_image,
+			activity.application_id,
+		),
+		largeText: activity.assets?.large_text ?? null,
+		smallImage: getDiscordAssetUrl(
+			activity.assets?.small_image,
+			activity.application_id,
+		),
+		smallText: activity.assets?.small_text ?? null,
+		details: activity.details ?? null,
+		state: activity.state ?? null,
+		time: startedAt
+			? dayjs.duration(Date.now() - startedAt).format("HH:mm:ss")
+			: null,
+	};
+}
+
+// Assets do Discord vêm como proxy externo (mp:external/.../https/...)
+// ou como id de asset da aplicação
+function getDiscordAssetUrl(asset?: string, applicationId?: string) {
+	if (!asset) {
+		return null;
+	}
+
+	if (asset.startsWith("mp:")) {
+		return (
+			asset.match(/https\/.*$/)?.[0].replace("https/", "https://") ??
+			`https://media.discordapp.net/${asset.slice(3)}`
+		);
+	}
+
+	if (applicationId) {
+		return `https://cdn.discordapp.com/app-assets/${applicationId}/${asset}.png`;
+	}
+
+	return null;
 }
 
 async function getDiscordRecentPlayed(): Promise<Discord["recentPlayed"]> {
