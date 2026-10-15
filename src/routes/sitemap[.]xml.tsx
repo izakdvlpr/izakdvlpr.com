@@ -26,6 +26,11 @@ export const Route = createFileRoute("/sitemap.xml")({
 						priority: 0.9,
 					},
 					{
+						url: `${PUBLIC_URL}/projects`,
+						changeFrequency: "monthly",
+						priority: 0.8,
+					},
+					{
 						url: `${PUBLIC_URL}/setup`,
 						changeFrequency: "monthly",
 						priority: 0.7,

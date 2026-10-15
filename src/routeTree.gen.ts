@@ -14,6 +14,7 @@ import { Route as SetupRouteImport } from './routes/setup'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AiRouteImport } from './routes/ai'
 import { Route as AboutRouteImport } from './routes/about'
@@ -46,6 +47,11 @@ const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
   '/contact': typeof ContactRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/projects': typeof ProjectsRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
   '/contact': typeof ContactRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/projects': typeof ProjectsRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/ai': typeof AiRoute
   '/contact': typeof ContactRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/projects': typeof ProjectsRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/ai'
     | '/contact'
+    | '/llms.txt'
     | '/projects'
     | '/robots.txt'
     | '/rss.xml'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/ai'
     | '/contact'
+    | '/llms.txt'
     | '/projects'
     | '/robots.txt'
     | '/rss.xml'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/ai'
     | '/contact'
+    | '/llms.txt'
     | '/projects'
     | '/robots.txt'
     | '/rss.xml'
@@ -188,6 +200,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AiRoute: typeof AiRoute
   ContactRoute: typeof ContactRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   ProjectsRoute: typeof ProjectsRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -300,6 +320,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AiRoute: AiRoute,
   ContactRoute: ContactRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   ProjectsRoute: ProjectsRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   RssDotxmlRoute: RssDotxmlRoute,

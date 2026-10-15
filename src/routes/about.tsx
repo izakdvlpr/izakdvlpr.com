@@ -1,9 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-	head: () => ({
-		meta: [{ title: "Isaque Lima » About" }],
-	}),
+	head: () =>
+		seo({
+			title: "About",
+			description:
+				"Systems analyst and full stack developer since 2018, working with TypeScript, React and Node.js.",
+			path: "/about",
+		}),
 	component: AboutPage,
 });
 

@@ -1,16 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/ai")({
-	head: () => ({
-		meta: [
-			{ title: "Isaque Lima » AI & Intellectual Property" },
-			{
-				name: "description",
-				content:
-					"This page clarifies the terms of use of the content on this website in relation to artificial intelligence and intellectual property rights.",
-			},
-		],
-	}),
+	head: () =>
+		seo({
+			title: "AI & Intellectual Property",
+			description:
+				"This page clarifies the terms of use of the content on this website in relation to artificial intelligence and intellectual property rights.",
+			path: "/ai",
+		}),
 	component: AIPage,
 });
 

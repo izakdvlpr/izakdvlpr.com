@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 import { PUBLIC_URL } from "@/lib/constants";
 import { env } from "@/lib/env";
+import { seo } from "@/lib/seo";
 import { themeScript } from "@/lib/theme";
 import TanStackQueryDevtools from "../lib/tanstack-query/devtools";
 import appCss from "../styles.css?url";
@@ -22,33 +23,33 @@ interface MyRouterContext {
 	queryClient: QueryClient;
 }
 
-const title = "Isaque Lima";
-const description = "Full Stack Developer";
+// Fallback meta for routes without their own head (error/404); pages override
+// it via seo(). Canonical stays per page because links are not deduped.
+const { meta: fallbackMeta } = seo({
+	title: "Full Stack Developer",
+	description:
+		"Full Stack Developer. Passionate about programming, technology and pizza.",
+	path: "/",
+	bannerTitle: "Isaque Lima",
+});
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
-			{ title },
-			{ name: "description", content: description },
-			{ property: "og:title", content: title },
-			{ property: "og:description", content: description },
-			{ property: "og:type", content: "website" },
-			{ property: "og:locale", content: "pt_BR" },
-			{ property: "og:url", content: PUBLIC_URL },
-			{
-				property: "og:image",
-				content: `${PUBLIC_URL}/api/og?title=${encodeURIComponent(title)}`,
-			},
-			{ name: "twitter:card", content: "summary_large_image" },
-			{ name: "twitter:site", content: "@izakdvlpr" },
-			{ name: "twitter:creator", content: "@izakdvlpr" },
+			{ property: "og:locale", content: "en_US" },
+			...fallbackMeta,
 		],
 		links: [
 			{ rel: "icon", href: "/favicon.ico" },
-			{ rel: "canonical", href: PUBLIC_URL },
 			{ rel: "stylesheet", href: appCss },
+			{
+				rel: "alternate",
+				type: "application/rss+xml",
+				title: "Isaque Lima » Blog",
+				href: `${PUBLIC_URL}/rss.xml`,
+			},
 		],
 	}),
 	errorComponent: ErrorPage,

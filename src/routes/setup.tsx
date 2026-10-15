@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { setup } from "@/lib/data";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/setup")({
-	head: () => ({
-		meta: [{ title: "Isaque Lima » Setup" }],
-	}),
+	head: () =>
+		seo({
+			title: "Setup",
+			description: "Hardware and peripherals I use on a daily basis.",
+			path: "/setup",
+		}),
 	component: SetupPage,
 });
 

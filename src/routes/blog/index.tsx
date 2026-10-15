@@ -1,12 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/badge";
 import { Image } from "@/components/ui/image";
+import { seo } from "@/lib/seo";
 import { getBlogList } from "@/lib/server/blog";
 
 export const Route = createFileRoute("/blog/")({
-	head: () => ({
-		meta: [{ title: "Isaque Lima » Blog" }],
-	}),
+	head: () =>
+		seo({
+			title: "Blog",
+			description:
+				"A blog about technology, programming, and everything else I find interesting.",
+			path: "/blog",
+		}),
 	validateSearch: (search: Record<string, unknown>): { tag?: string } =>
 		typeof search.tag === "string" ? { tag: search.tag } : {},
 	loaderDeps: ({ search: { tag } }) => ({ tag }),

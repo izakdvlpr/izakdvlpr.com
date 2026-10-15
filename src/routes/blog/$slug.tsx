@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/badge";
 import { Image } from "@/components/ui/image";
 import { MDXRender } from "@/components/ui/mdx/mdx-render";
-import { PUBLIC_URL, USERNAME } from "@/lib/constants";
+import { seo } from "@/lib/seo";
 import { getPost } from "@/lib/server/blog";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -20,29 +20,16 @@ export const Route = createFileRoute("/blog/$slug")({
 			return {};
 		}
 
-		const post = loaderData;
-		const url = `${PUBLIC_URL}/blog/${post.slug}`;
-		const title = `Isaque Lima » ${post.title}`;
-		const description = `${post.description}\n\n${post.date} • ${post.words} words • ${post.readingTime} • ${post.views} views\n\n${post.tags.join(", ")}\n\nBy @${USERNAME}`;
-		const image = `${PUBLIC_URL}${post.thumbnail}`;
-
-		return {
-			meta: [
-				{ title },
-				{ name: "description", content: description },
-				{ property: "og:title", content: title },
-				{ property: "og:description", content: description },
-				{ property: "og:type", content: "article" },
-				{ property: "og:url", content: url },
-				{ property: "og:image", content: image },
-				{ name: "twitter:card", content: "summary_large_image" },
-				{ name: "twitter:title", content: title },
-				{ name: "twitter:description", content: description },
-				{ name: "twitter:image", content: image },
-				{ name: "twitter:creator", content: `@${USERNAME}` },
-			],
-			links: [{ rel: "canonical", href: url }],
-		};
+		return seo({
+			title: loaderData.title,
+			description: loaderData.description,
+			path: `/blog/${loaderData.slug}`,
+			type: "article",
+			article: {
+				publishedTime: loaderData.publishedAt,
+				tags: loaderData.tags,
+			},
+		});
 	},
 	component: PostPage,
 });

@@ -4,11 +4,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Form } from "@/components/pages/contact/form";
 import { Button } from "@/components/ui/button";
 import { socials } from "@/lib/data";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
-	head: () => ({
-		meta: [{ title: "Isaque Lima » Contact" }],
-	}),
+	head: () =>
+		seo({
+			title: "Contact",
+			description:
+				"Have a question or just want to say hi? Reach out through social networks, download my resume or send me a direct message.",
+			path: "/contact",
+		}),
 	component: ContactPage,
 });
 

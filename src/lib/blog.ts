@@ -10,6 +10,7 @@ export interface Post {
 	title: string;
 	description: string;
 	date: string;
+	publishedAt: string;
 	tags: string[];
 	thumbnail: string;
 	readingTime: string;
@@ -92,6 +93,7 @@ export async function getPostBySlug(
 		title,
 		description,
 		date: dayjs(date).format("MMMM D, YYYY"),
+		publishedAt: dayjs(date).toISOString(),
 		tags: tags ?? [],
 		thumbnail,
 		readingTime: times.text,

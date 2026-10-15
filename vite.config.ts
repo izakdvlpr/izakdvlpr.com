@@ -36,11 +36,13 @@ function rawMdxPlugin() {
 
 const config = defineConfig({
 	resolve: { tsconfigPaths: true },
-	optimizeDeps: { exclude: ["@resvg/resvg-js"] },
-	ssr: { external: ["@resvg/resvg-js"] },
+	optimizeDeps: { exclude: ["takumi-js", "@takumi-rs/core"] },
+	ssr: { external: ["takumi-js", "@takumi-rs/core"] },
 	plugins: [
 		devtools(),
-		nitro(),
+		// takumi-js loads its native backend dynamically: bundling drops the named
+		// exports and partial tracing misses files, so trace the whole package.
+		nitro({ traceDeps: ["takumi-js*"] }),
 		tailwindcss(),
 		rawMdxPlugin(),
 		{

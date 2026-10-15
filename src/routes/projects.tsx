@@ -5,11 +5,16 @@ import { LinkIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { type Project, projects } from "@/lib/data";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/projects")({
-	head: () => ({
-		meta: [{ title: "Isaque Lima » Projects" }],
-	}),
+	head: () =>
+		seo({
+			title: "Projects",
+			description:
+				"A selection of things I've been building. From developer tools to community platforms.",
+			path: "/projects",
+		}),
 	component: ProjectsPage,
 });
 
