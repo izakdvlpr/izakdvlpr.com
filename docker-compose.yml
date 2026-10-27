@@ -11,7 +11,7 @@
 services:
   redis:
     container_name: redis
-    image: bitnami/redis:latest
+    image: soldevelo/redis:latest
     restart: always
     tty: true
     stdin_open: true
