@@ -108,7 +108,7 @@ export const projects: Project[] = [
 		status: "live",
 		githubUrl: "https://github.com/TrackGeek",
 		liveUrl: "https://trackgeek.net",
-		tags: ["TypeScript", "TanStack", "NestJS", "PostgreSQL", "Redis"],
+		tags: ["TanStack Start", "NestJS", "Flutter", "PostgreSQL", "Redis"],
 	},
 	{
 		name: "DataXamas",
@@ -117,7 +117,7 @@ export const projects: Project[] = [
 			"A lightweight analytics tracker that monitors page views, visitor origins, devices, browsers and geographic data in real time — similar to Google Analytics but simpler and privacy-focused.",
 		status: "live",
 		liveUrl: "https://dataxamas.izakdvlpr.com",
-		tags: ["TypeScript", "Next.js", "PostgreSQL", "Redis"],
+		tags: ["TanStack Start", "Prisma", "PostgreSQL", "MongoDB", "Redis"],
 	},
 ];
 
