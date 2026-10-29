@@ -116,7 +116,7 @@ export const projects: Project[] = [
 		description:
 			"A lightweight analytics tracker that monitors page views, visitor origins, devices, browsers and geographic data in real time — similar to Google Analytics but simpler and privacy-focused.",
 		status: "live",
-		liveUrl: "https://dataxamas.izakdvlpr.com",
+		liveUrl: "https://dataxamas.com",
 		tags: ["TanStack Start", "Prisma", "PostgreSQL", "MongoDB", "Redis"],
 	},
 ];
